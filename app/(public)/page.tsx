@@ -2,7 +2,7 @@
 
 import { Icon } from "@iconify/react";
 import { motion, useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 
 // ─── Animation Variants ───────────────────────────────────────────────────────
@@ -51,23 +51,24 @@ function RevealSection({ children, className = "" }: { children: React.ReactNode
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Profile {
-  full_name: string;
-  role_tagline: string;
-  hero_headline: string;
   about_me: string;
-  resume_url: string | null;
-  is_available: boolean;
-  github_url: string | null;
-  linkedin_url: string | null;
-  instagram_url: string | null;
+  avatar_url: string | null;
   email: string | null;
+  full_name: string;
+  github_url: string | null;
+  hero_headline: string;
+  instagram_url: string | null;
+  is_available: boolean;
+  linkedin_url: string | null;
+  resume_url: string | null;
+  role_tagline: string;
 }
 
-interface Skill { id: string; name: string; level: number; category: string; }
-interface Experience { id: string; role: string; company: string; period: string; is_current: boolean; description: string; }
-interface Certificate { id: string; title: string; issuer: string; date: string; color: string; }
-interface Service { id: string; title: string; description: string; price: string; icon: string; }
-interface Project { id: string; title: string; description: string; tags: string[]; gradient: string; is_featured: boolean; status: string; demo_url: string | null; github_url: string | null; image_url?: string | null; }
+interface Skill { id: string; category: string; level: number; name: string; }
+interface Experience { id: string; company: string; description: string; is_current: boolean; period: string; role: string; }
+interface Certificate { id: string; color: string; date: string; issuer: string; title: string; }
+interface Service { id: string; description: string; icon: string; price: string; title: string; }
+interface Project { id: string; demo_url: string | null; description: string; github_url: string | null; gradient: string; image_url?: string | null; is_featured: boolean; status: string; tags: string[]; title: string; }
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function Home() {
@@ -209,14 +210,25 @@ export default function Home() {
             className="relative mx-auto w-full max-w-sm"
           >
             <div
-              className="aspect-[4/5] rounded-2xl flex items-center justify-center relative overflow-hidden"
+              className="aspect-[4/5] rounded-2xl flex items-center justify-center relative overflow-hidden bg-coal-900"
               style={{
-                background: "linear-gradient(135deg, #279E60, #0D2B1C)",
-                border: "1px solid #212922",
                 boxShadow: "0 4px 12px -4px rgba(0,0,0,0.5), 0 20px 40px -12px rgba(0,0,0,0.6)",
               }}
             >
-              <Icon icon="solar:user-id-bold" className="text-white/10 text-[10rem]" />
+              {profile?.avatar_url ? (
+                <img
+                  src={profile.avatar_url}
+                  alt={displayName}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div
+                  className="w-full h-full flex items-center justify-center"
+                  style={{ background: "linear-gradient(135deg, #279E60, #0D2B1C)" }}
+                >
+                  <Icon icon="solar:user-id-bold" className="text-white/10 text-[10rem]" />
+                </div>
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-coal-950/50 via-transparent to-transparent" />
             </div>
 
