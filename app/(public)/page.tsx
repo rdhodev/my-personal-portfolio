@@ -103,7 +103,7 @@ export default function Home() {
     fetchAll();
   }, []);
 
-  const skillGroups = ["Frontend", "Backend", "Tools"].map((cat) => ({
+  const skillGroups = ["Mobile", "Web", "AI", "Tools", "Others"].map((cat) => ({
     label: cat,
     skills: skills.filter((s) => s.category === cat),
   })).filter((g) => g.skills.length > 0);

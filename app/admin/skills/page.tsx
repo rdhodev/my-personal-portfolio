@@ -11,9 +11,9 @@ interface Skill {
   category: string;
 }
 
-const CATEGORIES = ["Frontend", "Backend", "Tools"];
+const CATEGORIES = ["Mobile", "Web", "AI", "Tools", "Others"];
 
-const BLANK_SKILL: Omit<Skill, "id"> = { name: "", level: 80, category: "Frontend" };
+const BLANK_SKILL: Omit<Skill, "id"> = { name: "", level: 80, category: "Mobile" };
 
 export default function AdminSkillsPage() {
   const supabase = createClient();
