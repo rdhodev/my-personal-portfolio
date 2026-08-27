@@ -116,44 +116,54 @@ export default function BlogPostDetail() {
           <Icon icon="solar:document-text-bold-duotone" className="text-white/20 text-6xl" />
         </div>
 
-        <div className="prose prose-invert prose-pine max-w-none text-mist text-sm sm:text-base leading-relaxed space-y-6">
-          {post.content.trim().split("\n\n").map((block, idx) => {
-            if (block.startsWith("### ")) {
-              return <h3 key={idx} className="font-display font-semibold text-lg sm:text-xl text-bone pt-4">{block.replace("### ", "")}</h3>;
-            }
-            if (block.startsWith("- ")) {
-              return (
-                <ul key={idx} className="list-disc pl-5 space-y-1.5 text-mist">
-                  {block.split("\n").map((item, itemIdx) => (
-                    <li key={itemIdx}>{item.replace("- ", "")}</li>
-                  ))}
-                </ul>
-              );
-            }
-            if (block.startsWith("1. ")) {
-              return (
-                <ol key={idx} className="list-decimal pl-5 space-y-1.5 text-mist">
-                  {block.split("\n").map((item, itemIdx) => (
-                    <li key={itemIdx}>{item.replace(/^\d+\.\s+/, "")}</li>
-                  ))}
-                </ol>
-              );
-            }
-            if (block.startsWith("```")) {
-              const lines = block.split("\n");
-              const code = lines.slice(1, lines.length - 1).join("\n");
-              return (
-                <pre key={idx} className="bg-coal-900 border border-coal-700/50 p-4 rounded-xl font-mono text-xs overflow-x-auto text-pine-300">
-                  <code>{code}</code>
-                </pre>
-              );
-            }
-            if (block.startsWith("---")) {
-              return <hr key={idx} className="border-coal-700 my-8" />;
-            }
-            return <p key={idx}>{block.replaceAll("`", "")}</p>;
-          })}
-        </div>
+        {/* Smart content renderer: HTML (Tiptap) or legacy plain text */}
+        {post.content.trim().startsWith("<") ? (
+          // HTML content from Tiptap rich editor
+          <div
+            className="blog-content"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+        ) : (
+          // Legacy plain text / markdown fallback
+          <div className="prose prose-invert prose-pine max-w-none text-mist text-sm sm:text-base leading-relaxed space-y-6">
+            {post.content.trim().split("\n\n").map((block, idx) => {
+              if (block.startsWith("### ")) {
+                return <h3 key={idx} className="font-display font-semibold text-lg sm:text-xl text-bone pt-4">{block.replace("### ", "")}</h3>;
+              }
+              if (block.startsWith("- ")) {
+                return (
+                  <ul key={idx} className="list-disc pl-5 space-y-1.5 text-mist">
+                    {block.split("\n").map((item, itemIdx) => (
+                      <li key={itemIdx}>{item.replace("- ", "")}</li>
+                    ))}
+                  </ul>
+                );
+              }
+              if (block.startsWith("1. ")) {
+                return (
+                  <ol key={idx} className="list-decimal pl-5 space-y-1.5 text-mist">
+                    {block.split("\n").map((item, itemIdx) => (
+                      <li key={itemIdx}>{item.replace(/^\d+\.\s+/, "")}</li>
+                    ))}
+                  </ol>
+                );
+              }
+              if (block.startsWith("```")) {
+                const lines = block.split("\n");
+                const code = lines.slice(1, lines.length - 1).join("\n");
+                return (
+                  <pre key={idx} className="bg-coal-900 border border-coal-700/50 p-4 rounded-xl font-mono text-xs overflow-x-auto text-pine-300">
+                    <code>{code}</code>
+                  </pre>
+                );
+              }
+              if (block.startsWith("---")) {
+                return <hr key={idx} className="border-coal-700 my-8" />;
+              }
+              return <p key={idx}>{block.replaceAll("`", "")}</p>;
+            })}
+          </div>
+        )}
 
         <div className="mt-16 pt-8 border-t border-coal-700 flex justify-between items-center">
           <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm font-semibold text-pine-400 hover:text-pine-300 transition">
