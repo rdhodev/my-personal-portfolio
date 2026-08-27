@@ -111,10 +111,10 @@ export default function BlogPage() {
             <Icon icon="solar:arrow-left-linear" /> Back to Home
           </Link>
           <h1 className="font-display font-semibold text-3xl sm:text-5xl text-bone tracking-tight mb-4">
-            Catatan & <span className="text-pine-400">Artikel</span>
+            Notes &amp; <span className="text-pine-400">Articles</span>
           </h1>
           <p className="text-mist max-w-lg leading-relaxed text-sm sm:text-base">
-            Berbagi tentang web development, tips produktivitas, best practices coding, dan eksplorasi desain UI/UX.
+            Sharing thoughts on web development, productivity tips, coding best practices, and UI/UX design exploration.
           </p>
         </div>
 
@@ -145,7 +145,7 @@ export default function BlogPage() {
               ) : filteredPosts.length === 0 ? (
                 <div className="text-center py-16 border border-dashed border-coal-700 rounded-2xl">
                   <Icon icon="solar:sad-ellipse-bold-duotone" className="text-mist text-4xl mx-auto mb-3" />
-                  <p className="text-mist text-sm">Tidak ada artikel di kategori ini.</p>
+                  <p className="text-mist text-sm">No articles found in this category.</p>
                 </div>
               ) : (
                 filteredPosts.map((post, idx) => (
@@ -208,7 +208,7 @@ export default function BlogPage() {
               <div className="flex items-center gap-2 mb-6 border-b border-coal-800 pb-3">
                 <Icon icon="solar:fire-bold-duotone" className="text-pine-400 text-xl" />
                 <h3 className="font-display font-semibold text-sm text-bone">
-                  Trending Artikel
+                  Trending Articles
                 </h3>
               </div>
 
@@ -244,15 +244,15 @@ export default function BlogPage() {
             >
               <div className="relative z-10 text-center">
                 <h3 className="font-display font-semibold text-sm text-bone mb-2">
-                  Langganan Newsletter
+                  Subscribe to Newsletter
                 </h3>
                 <p className="text-[11px] text-mist mb-5 leading-relaxed">
-                  Dapatkan update artikel terbaru tentang Web Development langsung ke inbox email Anda setiap bulannya.
+                  Get the latest articles on Web Development sent directly to your inbox every month.
                 </p>
                 <div className="flex flex-col gap-2">
                   <input
                     type="email"
-                    placeholder="Alamat email Anda"
+                    placeholder="Your email address"
                     className="bg-coal-950 border border-coal-700 text-bone text-xs px-4 py-2.5 rounded-full w-full focus:outline-none focus:border-pine-500 transition"
                   />
                   <button className="bg-pine-400 text-coal-950 font-semibold text-xs px-5 py-2.5 rounded-full hover:bg-pine-300 transition w-full">

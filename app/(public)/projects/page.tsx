@@ -32,7 +32,7 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
 };
 
-const ALL_TAGS = "All";
+
 
 // ── Skeleton Card ──────────────────────────────────────────────────────────────
 const SkeletonCard = () => (
@@ -54,7 +54,6 @@ const SkeletonCard = () => (
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTag, setActiveTag] = useState(ALL_TAGS);
 
   useEffect(() => {
     async function fetchProjects() {
@@ -77,12 +76,7 @@ export default function ProjectsPage() {
     fetchProjects();
   }, []);
 
-  // Collect unique tags from all projects
-  const allTags = [ALL_TAGS, ...Array.from(new Set(projects.flatMap((p) => p.tags)))];
 
-  const filtered = activeTag === ALL_TAGS
-    ? projects
-    : projects.filter((p) => p.tags.includes(activeTag));
 
   const featured = projects.filter((p) => p.is_featured);
   const total = projects.length;
@@ -115,7 +109,7 @@ export default function ProjectsPage() {
             Projects &amp; <span className="text-pine-400">Work</span>
           </motion.h1>
           <motion.p variants={fadeUp} className="text-mist max-w-lg leading-relaxed text-sm sm:text-base mb-8">
-            Kumpulan proyek yang pernah saya bangun — dari side project pribadi hingga produk untuk klien nyata.
+            A collection of projects I've built — from personal side projects to products for real clients.
           </motion.p>
 
           {/* Stats */}
@@ -134,56 +128,24 @@ export default function ProjectsPage() {
             </motion.div>
           )}
         </motion.div>
-
-        {/* ── Tag Filter ──────────────────────────────────────────────────── */}
-        {!isLoading && allTags.length > 1 && (
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex flex-wrap gap-2 mb-10 pb-6 border-b border-coal-800"
-          >
-            {allTags.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => setActiveTag(tag)}
-                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
-                  activeTag === tag
-                    ? "bg-pine-400 text-coal-950"
-                    : "bg-coal-900 border border-coal-700 text-mist hover:text-bone hover:border-coal-600"
-                }`}
-              >
-                {tag}
-              </button>
-            ))}
-          </motion.div>
-        )}
-
         {/* ── Project Grid ─────────────────────────────────────────────────── */}
         {isLoading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5, 6].map((i) => <SkeletonCard key={i} />)}
           </div>
-        ) : filtered.length === 0 ? (
+        ) : projects.length === 0 ? (
           <div className="text-center py-24 border border-dashed border-coal-700 rounded-2xl">
             <Icon icon="solar:folder-open-bold-duotone" className="text-mist text-5xl mx-auto mb-4 opacity-40" />
-            <p className="text-mist text-sm">Tidak ada project untuk tag ini.</p>
-            <button
-              onClick={() => setActiveTag(ALL_TAGS)}
-              className="mt-3 text-pine-400 hover:text-pine-300 text-sm transition"
-            >
-              Lihat semua →
-            </button>
+            <p className="text-mist text-sm">No projects have been published yet.</p>
           </div>
         ) : (
           <motion.div
-            key={activeTag}
             initial="hidden"
             animate="visible"
             variants={stagger}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {filtered.map((proj) => (
+            {projects.map((proj) => (
               <motion.div
                 key={proj.id}
                 variants={fadeUp}
@@ -257,9 +219,8 @@ export default function ProjectsPage() {
                     {proj.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[10px] font-mono text-pine-300 px-2 py-0.5 rounded-full cursor-pointer hover:bg-pine-900/60 transition"
+                        className="text-[10px] font-mono text-pine-300 px-2 py-0.5 rounded-full"
                         style={{ background: "rgba(13,43,28,0.5)" }}
-                        onClick={() => setActiveTag(tag)}
                       >
                         {tag}
                       </span>
@@ -305,12 +266,12 @@ export default function ProjectsPage() {
             transition={{ delay: 0.4 }}
             className="mt-16 pt-10 border-t border-coal-800 flex flex-col sm:flex-row items-center justify-between gap-4"
           >
-            <p className="text-sm text-mist">Tertarik untuk berkolaborasi?</p>
+            <p className="text-sm text-mist">Interested in working together?</p>
             <Link
               href="/#contact"
               className="inline-flex items-center gap-2 bg-pine-400 text-coal-950 text-sm font-bold px-6 py-2.5 rounded-full hover:bg-pine-300 transition"
             >
-              <Icon icon="solar:chat-round-dots-bold" /> Hubungi Saya
+              <Icon icon="solar:chat-round-dots-bold" /> Contact Me
             </Link>
           </motion.div>
         )}

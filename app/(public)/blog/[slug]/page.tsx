@@ -78,10 +78,10 @@ export default function BlogPostDetail() {
     return (
       <div className="min-h-screen bg-coal-950 flex flex-col items-center justify-center text-center px-5">
         <Icon icon="solar:danger-circle-bold-duotone" className="text-pine-400 text-6xl mb-4" />
-        <h1 className="text-2xl font-bold text-bone mb-2">Artikel Tidak Ditemukan</h1>
-        <p className="text-mist text-sm mb-6">Maaf, artikel yang Anda cari tidak tersedia atau telah dihapus.</p>
+        <h1 className="text-2xl font-bold text-bone mb-2">Article Not Found</h1>
+        <p className="text-mist text-sm mb-6">Sorry, the article you are looking for is not available or has been deleted.</p>
         <Link href="/blog" className="inline-flex items-center gap-1.5 bg-pine-400 text-coal-950 text-xs font-bold px-5 py-2.5 rounded-full hover:bg-pine-300 transition">
-          <Icon icon="solar:arrow-left-linear" /> Kembali ke Blog
+          <Icon icon="solar:arrow-left-linear" /> Back to Blog
         </Link>
       </div>
     );
@@ -167,7 +167,7 @@ export default function BlogPostDetail() {
 
         <div className="mt-16 pt-8 border-t border-coal-700 flex justify-between items-center">
           <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm font-semibold text-pine-400 hover:text-pine-300 transition">
-            <Icon icon="solar:arrow-left-linear" /> Kembali ke Blog
+            <Icon icon="solar:arrow-left-linear" /> Back to Blog
           </Link>
         </div>
       </article>

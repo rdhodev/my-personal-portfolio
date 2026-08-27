@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -109,8 +110,9 @@ export default function Home() {
   })).filter((g) => g.skills.length > 0);
 
   const displayName = profile?.full_name ?? "Ridho";
+  const displayHeroHeadline = profile?.hero_headline ?? "Building products that feel obvious to use.";
   const displayRole = profile?.role_tagline ?? "Front-End Developer & UI Designer";
-  const displayAbout = profile?.about_me ?? "Freelance developer dengan pengalaman 4+ tahun membangun website dan aplikasi untuk klien lokal maupun internasional.";
+  const displayAbout = profile?.about_me ?? "Freelance developer with 4+ years of experience building websites and web applications for local and international clients.";
 
   return (
     <div className="font-sans text-bone bg-coal-950 overflow-x-hidden">
@@ -129,15 +131,6 @@ export default function Home() {
             animate="visible"
             variants={stagger}
           >
-            <motion.span
-              variants={fadeUp}
-              custom={0}
-              className="inline-flex items-center gap-2 font-mono text-xs text-pine-400 mb-5 px-3 py-1.5 rounded-full"
-              style={{ background: "rgba(13,43,28,0.4)", border: "1px solid rgba(23,92,58,0.4)" }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-pine-400 animate-pulse" />
-              {profile?.is_available !== false ? "Available for work" : "Currently unavailable"}
-            </motion.span>
 
             <motion.h1
               variants={fadeUp}
@@ -154,7 +147,7 @@ export default function Home() {
               custom={0.16}
               className="text-mist text-base sm:text-lg max-w-md mb-8 leading-relaxed"
             >
-              Saya {displayName.split(" ")[0]}, {displayRole.toLowerCase()} di Pekanbaru. {displayAbout.slice(0, 100)}...
+              I'm {displayName.split(" ")[0]}, {displayRole.toLowerCase()} at Pekanbaru. {displayHeroHeadline}
             </motion.p>
 
             <motion.div variants={fadeUp} custom={0.24} className="flex flex-wrap items-center gap-3 mb-10">
@@ -180,7 +173,7 @@ export default function Home() {
                   className="inline-flex items-center gap-2 text-bone text-sm font-medium px-5 py-3 rounded-full transition hover:border-pine-500/60"
                   style={{ background: "#0A0D0B", border: "1px solid #212922" }}
                 >
-                  <Icon icon="solar:letter-linear" /> Hubungi Saya
+                  <Icon icon="solar:letter-linear" /> Contact Me
                 </a>
               )}
             </motion.div>
@@ -232,12 +225,11 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-coal-950/50 via-transparent to-transparent" />
             </div>
 
-            {/* Code card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute -bottom-8 -left-6 sm:-left-12 rounded-xl p-4 w-64 font-mono text-[11px] leading-relaxed"
+              className="absolute -bottom-8 left-1/2 -translate-x-1/2 sm:-left-6 sm:translate-x-0 lg:-left-12 rounded-xl p-4 w-64 font-mono text-[11px] leading-relaxed"
               style={{
                 background: "#0A0D0B",
                 border: "1px solid rgba(39,158,96,0.4)",
@@ -251,7 +243,7 @@ export default function Home() {
               </div>
               <p><span className="text-pine-300">const</span> <span className="text-pine-400">developer</span> = {"{"}</p>
               <p className="pl-3">name: <span className="text-mist">&quot;{displayName}&quot;</span>,</p>
-              <p className="pl-3">role: <span className="text-mist">&quot;Frontend Dev&quot;</span>,</p>
+              <p className="pl-3">role: <span className="text-mist">&quot;{displayRole}&quot;</span>,</p>
               <p className="pl-3">base: <span className="text-mist">&quot;Pekanbaru, ID&quot;</span>,</p>
               <p className="pl-3">status: <span className="text-pine-300">&quot;{profile?.is_available !== false ? "available" : "unavailable"}&quot;</span></p>
               <p>{"}"}</p>
@@ -269,7 +261,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
             <div className="lg:col-span-3">
               <motion.h2 variants={staggerItem} className="font-display font-semibold text-2xl sm:text-3xl text-bone mb-5">
-                Sedikit tentang saya
+                A little about me
               </motion.h2>
               <motion.p variants={staggerItem} className="text-mist leading-relaxed mb-4">
                 {displayAbout}
@@ -318,10 +310,10 @@ export default function Home() {
         <RevealSection>
           <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// skills</motion.p>
           <motion.h2 variants={staggerItem} className="font-display font-semibold text-2xl sm:text-3xl text-bone mb-12">
-            Tools yang saya pakai sehari-hari
+            Tools I use on a daily basis
           </motion.h2>
           {skillGroups.length === 0 ? (
-            <p className="text-mist text-sm">Skills belum ditambahkan.</p>
+            <p className="text-mist text-sm">No skills added yet.</p>
           ) : (
             <motion.div variants={stagger} className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {skillGroups.map((group) => (
@@ -345,7 +337,7 @@ export default function Home() {
           <RevealSection>
             <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// experience</motion.p>
             <motion.h2 variants={staggerItem} className="font-display font-semibold text-2xl sm:text-3xl text-bone mb-12">
-              Perjalanan karier singkat
+              Work experience
             </motion.h2>
             <div className="relative pl-8 max-w-3xl">
               <div className="absolute left-[7px] top-1 bottom-1 w-px" style={{ background: "#212922" }} />
@@ -375,10 +367,10 @@ export default function Home() {
           <RevealSection>
             <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// recent work</motion.p>
             <motion.h2 variants={staggerItem} className="font-display font-semibold text-2xl sm:text-3xl text-bone mb-12">
-              Beberapa proyek pilihan
+              Selected projects
             </motion.h2>
             <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projects.map((proj) => (
+              {projects.slice(0, 6).map((proj) => (
                 <motion.a
                   key={proj.id}
                   href={proj.demo_url ?? proj.github_url ?? "#"}
@@ -426,6 +418,17 @@ export default function Home() {
                 </motion.a>
               ))}
             </motion.div>
+
+            {projects.length > 6 && (
+              <motion.div variants={staggerItem} className="flex justify-center mt-12">
+                <Link
+                  href="/projects"
+                  className="inline-flex items-center gap-2 border border-coal-700 hover:border-pine-500/60 bg-coal-900 text-bone hover:text-pine-400 text-sm font-semibold px-6 py-3 rounded-full transition duration-300"
+                >
+                  View All Projects <Icon icon="solar:arrow-right-linear" />
+                </Link>
+              </motion.div>
+            )}
           </RevealSection>
         </section>
       )}
@@ -436,7 +439,7 @@ export default function Home() {
           <RevealSection>
             <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// certificates</motion.p>
             <motion.h2 variants={staggerItem} className="font-display font-semibold text-2xl sm:text-3xl text-bone mb-12">
-              Sertifikat &amp; kredensial
+              Certificates &amp; credentials
             </motion.h2>
             <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-3 gap-5">
               {certificates.map((cert) => (
@@ -467,7 +470,7 @@ export default function Home() {
           <RevealSection>
             <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// services</motion.p>
             <motion.h2 variants={staggerItem} className="font-display font-semibold text-2xl sm:text-3xl text-bone mb-12">
-              Yang bisa saya bantu
+              How I can help you
             </motion.h2>
             <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.map((srv) => (
@@ -505,17 +508,17 @@ export default function Home() {
             <div className="relative z-10">
               <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// contact</motion.p>
               <motion.h2 variants={staggerItem} className="font-display font-semibold text-3xl sm:text-4xl text-bone mb-4">
-                Mari bekerja sama
+                Let's work together
               </motion.h2>
               <motion.p variants={staggerItem} className="text-mist max-w-md mx-auto mb-8 leading-relaxed">
-                Saya terbuka untuk proyek freelance, full-time, maupun kolaborasi. Ceritakan proyekmu dan kita diskusikan.
+                I'm open to freelance projects, full-time opportunities, or collaboration. Tell me about your project and let's discuss.
               </motion.p>
               <motion.div variants={staggerItem} className="flex flex-wrap justify-center gap-3">
                 <a
                   href={profile?.email ? `mailto:${profile.email}` : "mailto:hello@example.com"}
                   className="inline-flex items-center gap-2 bg-pine-400 text-coal-950 text-sm font-semibold px-6 py-3 rounded-full hover:bg-pine-300 transition"
                 >
-                  <Icon icon="solar:letter-linear" /> Kirim Email
+                  <Icon icon="solar:letter-linear" /> Send Email
                 </a>
                 {profile?.linkedin_url && (
                   <a

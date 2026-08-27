@@ -28,7 +28,7 @@ export default function Navbar() {
               Home
             </Link>
             <Link
-              href="/#projects"
+              href="/projects"
               className="text-sm font-medium text-mist hover:text-bone transition"
             >
               Projects
@@ -87,7 +87,7 @@ export default function Navbar() {
             Home
           </Link>
           <Link
-            href="/#projects"
+            href="/projects"
             onClick={() => setIsOpen(false)}
             className="block py-2 text-base font-medium text-mist hover:text-bone"
           >
