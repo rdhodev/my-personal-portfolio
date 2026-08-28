@@ -15,7 +15,9 @@ export default function AdminLayout({
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   const isAuthPage =
-    pathname === "/admin/login" || pathname === "/admin/register";
+    pathname === "/admin/login" ||
+    pathname === "/admin/register" ||
+    pathname === "/admin/verify-otp";
 
   if (isAuthPage) {
     return <div className="min-h-screen bg-gray-50 dark:bg-zinc-950 font-sans">{children}</div>;
