@@ -145,7 +145,9 @@ export default function AdminLayout({
             View Live Site
           </Link>
           <button
-            onClick={() => router.push("/admin/login")}
+            onClick={() => {
+              window.location.href = "/api/admin/logout";
+            }}
             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-mist hover:bg-coal-800 hover:text-red-400 transition text-left"
           >
             <Icon icon="solar:logout-3-bold-duotone" className="text-lg" />

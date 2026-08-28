@@ -2,13 +2,47 @@
 
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function LoginPage() {
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    router.push("/admin/dashboard");
+    setError("");
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Login gagal. Coba lagi.");
+        return;
+      }
+
+      if (data.requireOtp) {
+        // Redirect to OTP verification page
+        router.push("/admin/verify-otp");
+        return;
+      }
+
+      router.push("/admin/dashboard");
+      router.refresh();
+    } catch {
+      setError("Terjadi kesalahan. Periksa koneksi internet kamu.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -33,11 +67,15 @@ export default function LoginPage() {
                 <input
                   type="email"
                   placeholder="you@email.com"
-                  defaultValue="ridho@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  autoComplete="email"
                   className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-coal-700 bg-coal-950 text-bone text-sm focus:outline-none focus:ring-2 focus:ring-pine-500/20 focus:border-pine-500 placeholder:text-coal-700"
                 />
               </div>
             </div>
+
             <div>
               <label className="block text-xs font-medium text-mist mb-1.5">Password</label>
               <div className="relative">
@@ -45,25 +83,47 @@ export default function LoginPage() {
                 <input
                   type="password"
                   placeholder="••••••••"
-                  defaultValue="123456"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  autoComplete="current-password"
                   className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-coal-700 bg-coal-950 text-bone text-sm focus:outline-none focus:ring-2 focus:ring-pine-500/20 focus:border-pine-500 placeholder:text-coal-700"
                 />
               </div>
             </div>
 
-            <div className="flex items-center justify-between text-sm pt-1">
-              <label className="flex items-center gap-2 text-mist text-xs">
-                <input type="checkbox" className="rounded border-coal-700 bg-coal-950 text-pine-600 focus:ring-pine-500/20" />
-                Remember me
-              </label>
-              <a href="#" className="text-xs font-medium text-pine-400 hover:text-pine-300">Forgot password?</a>
-            </div>
+            {/* Error message */}
+            {error && (
+              <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs">
+                <Icon icon="solar:danger-circle-bold" className="text-sm shrink-0" />
+                {error}
+              </div>
+            )}
+
+            {/* Info — OTP step */}
+            {!error && (
+              <div className="flex items-start gap-2 px-3 py-2.5 rounded-xl bg-pine-500/10 border border-pine-500/20 text-pine-400 text-xs">
+                <Icon icon="solar:info-circle-bold" className="text-sm shrink-0 mt-0.5" />
+                Setelah login, kode OTP akan dikirim ke email kamu untuk verifikasi.
+              </div>
+            )}
 
             <button
               type="submit"
-              className="w-full py-2.5 rounded-xl bg-pine-400 text-coal-950 font-bold text-sm shadow-soft hover:bg-pine-300 transition"
+              disabled={isLoading}
+              className="w-full py-2.5 rounded-xl bg-pine-400 text-coal-950 font-bold text-sm shadow-soft hover:bg-pine-300 transition disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              Login
+              {isLoading ? (
+                <>
+                  <Icon icon="solar:spinner-bold" className="animate-spin text-base" />
+                  Mengirim OTP...
+                </>
+              ) : (
+                <>
+                  <Icon icon="solar:arrow-right-bold" className="text-base" />
+                  Lanjutkan
+                </>
+              )}
             </button>
           </form>
         </div>
