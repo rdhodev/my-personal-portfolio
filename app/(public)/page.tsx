@@ -169,23 +169,13 @@ export default function Home() {
               >
                 View my work <Icon icon="solar:arrow-right-linear" />
               </a>
-              {profile?.resume_url ? (
-                <a
-                  href={profile.resume_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="brutal-btn inline-flex items-center justify-center gap-2 bg-coal-900 text-bone text-xs sm:text-sm font-bold px-5 py-2.5 rounded-sm hover:bg-coal-800 border-2 border-coal-600"
-                >
-                  <Icon icon="solar:download-minimalistic-linear" /> Download CV
-                </a>
-              ) : (
-                <a
-                  href="#contact"
-                  className="brutal-btn inline-flex items-center justify-center gap-2 bg-coal-900 text-bone text-xs sm:text-sm font-bold px-5 py-2.5 rounded-sm hover:bg-coal-800 border-2 border-coal-600"
-                >
-                  <Icon icon="solar:letter-linear" /> Contact Me
-                </a>
-              )}
+              <a
+                href="/api/download-cv"
+                download="CV_Ridho_Hidayat.pdf"
+                className="brutal-btn inline-flex items-center justify-center gap-2 bg-coal-900 text-bone text-xs sm:text-sm font-bold px-5 py-2.5 rounded-sm hover:bg-coal-800 border-2 border-coal-600 cursor-pointer"
+              >
+                <Icon icon="solar:download-minimalistic-bold" /> Download CV
+              </a>
             </motion.div>
 
             <motion.div variants={fadeUp} custom={0.32} className="flex items-center justify-center lg:justify-start gap-4 sm:gap-6 text-[11px] sm:text-xs text-mist font-mono">

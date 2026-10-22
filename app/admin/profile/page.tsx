@@ -266,7 +266,8 @@ export default function AdminProfilePage() {
         <div className="flex items-center gap-3">
           <button
             type="submit"
-            disabled={isSaving || isLoading || isUploading}
+            suppressHydrationWarning
+            disabled={Boolean(isSaving || isLoading || isUploading)}
             className="inline-flex items-center gap-2 bg-pine-400 text-coal-950 text-sm font-bold px-4 py-2.5 rounded-xl shadow-soft hover:bg-pine-300 transition w-fit disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {isSaving ? (
@@ -391,14 +392,50 @@ export default function AdminProfilePage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-mist mb-1.5">Resume URL / CV</label>
-                  <input
-                    type="text"
-                    placeholder="https://..."
-                    value={profile.resume_url ?? ""}
-                    onChange={(e) => handleChange("resume_url", e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl border border-coal-700 bg-coal-950 text-bone text-sm focus:outline-none focus:ring-2 focus:ring-pine-500/20 focus:border-pine-500 placeholder:text-coal-600"
-                  />
+                  <label className="block text-xs font-medium text-mist mb-1.5">Resume / CV Document</label>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="https://... atau upload file PDF"
+                      value={profile.resume_url ?? ""}
+                      onChange={(e) => handleChange("resume_url", e.target.value)}
+                      className="flex-1 px-3 py-2.5 rounded-xl border border-coal-700 bg-coal-950 text-bone text-sm focus:outline-none focus:ring-2 focus:ring-pine-500/20 focus:border-pine-500 placeholder:text-coal-600"
+                    />
+                    <label className="px-3.5 py-2.5 bg-coal-800 border border-coal-700 text-bone rounded-xl text-xs font-semibold cursor-pointer hover:bg-coal-700 transition flex items-center gap-1.5 whitespace-nowrap shrink-0">
+                      <Icon icon="solar:upload-minimalistic-linear" className="text-base" />
+                      <span>{isUploading ? "Uploading..." : "Upload PDF"}</span>
+                      <input
+                        type="file"
+                        accept=".pdf,application/pdf"
+                        className="hidden"
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          try {
+                            setIsUploading(true);
+                            showToast("success", "Mengunggah file CV...");
+                            const fileName = `cv-${Date.now()}.pdf`;
+                            const filePath = `documents/${fileName}`;
+                            const { error: uploadError } = await supabase.storage
+                              .from("portfolio-assets")
+                              .upload(filePath, file, {
+                                contentType: "application/pdf",
+                                upsert: true,
+                              });
+                            if (uploadError) throw uploadError;
+                            const { data: urlData } = supabase.storage.from("portfolio-assets").getPublicUrl(filePath);
+                            handleChange("resume_url", urlData.publicUrl);
+                            showToast("success", "File CV berhasil diunggah! Jangan lupa klik Save Changes.");
+                          } catch (err: any) {
+                            showToast("error", "Gagal upload CV: " + err.message);
+                          } finally {
+                            setIsUploading(false);
+                            e.target.value = "";
+                          }
+                        }}
+                      />
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
