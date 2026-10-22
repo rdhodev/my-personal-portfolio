@@ -151,7 +151,7 @@ export default function Home() {
             >
               Building products<br className="hidden sm:block" />
               {" "}that feel{" "}
-              <span className="text-pine-400 underline decoration-pine-500 decoration-wavy decoration-2">obvious</span> to use.
+              <span className="text-pine-400 underline decoration-pine-500 decoration-2">obvious</span> to use.
             </motion.h1>
 
             <motion.p

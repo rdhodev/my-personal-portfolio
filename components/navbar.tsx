@@ -72,26 +72,26 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center gap-2">
               <span className="font-semibold text-base text-bone tracking-tight font-display">
-                Ridho<span className="text-pine-400">.dev</span>
+                Ridho<span className="text-pine-400"></span>
               </span>
             </Link>
           </div>
 
           {/* Desktop Nav (Centered absolutely or positioned in middle) */}
-          <div className="hidden md:flex items-center gap-2 absolute left-1/2 -translate-x-1/2">
+          <div className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
             {navItems.map((item) => {
               const active = isItemActive(item.href);
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`relative text-xs font-mono font-medium px-3 py-1.5 rounded-sm transition-all ${active
-                    ? "text-pine-400 bg-coal-900 border border-pine-800/80 shadow-[2px_2px_0px_#1F7A4C]"
-                    : "text-mist hover:text-bone hover:bg-coal-900/50"
-                    }`}
+                  className={`text-xs font-mono font-medium transition-colors ${
+                    active
+                      ? "text-pine-400 font-semibold"
+                      : "text-mist hover:text-bone"
+                  }`}
                 >
                   {item.label}
-
                 </Link>
               );
             })}
@@ -126,12 +126,7 @@ export default function Navbar() {
 
       {/* Mobile Nav Menu Drawer with Animation */}
       {isOpen && (
-        <div className="md:hidden border-b-2 border-coal-700 bg-coal-950/98 backdrop-blur-xl px-5 pt-3 pb-6 shadow-[0_8px_0px_#000000]">
-          {/* Header indicator */}
-          <div className="flex items-center justify-between pb-3 mb-2 border-b border-coal-800">
-            <span className="font-mono text-[10px] text-mist/60 uppercase tracking-widest">// Navigation</span>
-          </div>
-
+        <div className="md:hidden border-b border-coal-800 bg-coal-950/98 backdrop-blur-xl px-5 pt-3 pb-6">
           <div className="space-y-1">
             {navItems.map((item) => {
               const active = isItemActive(item.href);
@@ -140,29 +135,17 @@ export default function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className={`group flex items-center justify-between py-2.5 px-3 rounded-sm text-xs font-mono font-medium border transition-all ${active
-                    ? "text-pine-300 bg-coal-900 border-pine-500 shadow-[3px_3px_0px_#1F7A4C]"
-                    : "text-mist hover:text-bone hover:bg-coal-900 border-transparent hover:border-coal-700 hover:shadow-[2px_2px_0px_#000000]"
-                    }`}
+                  className={`flex items-center gap-3 py-2.5 px-3 rounded-sm text-xs font-mono transition-colors ${
+                    active
+                      ? "text-pine-400 font-bold"
+                      : "text-mist hover:text-bone hover:bg-coal-900/40"
+                  }`}
                 >
-                  <div className="flex items-center gap-2.5">
-                    <Icon
-                      icon={item.icon}
-                      className={`text-sm transition-colors ${active ? "text-pine-400" : "text-mist group-hover:text-pine-400"
-                        }`}
-                    />
-                    <span>{item.label}</span>
-                  </div>
-                  {active ? (
-                    <span className="font-mono text-[10px] text-pine-400 font-bold bg-coal-950 px-1.5 py-0.5 rounded-sm border border-pine-800">
-                      ACTIVE
-                    </span>
-                  ) : (
-                    <Icon
-                      icon="solar:arrow-right-linear"
-                      className="text-xs opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-pine-400 transition-all"
-                    />
-                  )}
+                  <Icon
+                    icon={item.icon}
+                    className={`text-base ${active ? "text-pine-400" : "text-mist"}`}
+                  />
+                  <span>{item.label}</span>
                 </Link>
               );
             })}
