@@ -15,8 +15,38 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ridho Hidayat - Personal Portfolio",
-  description: "Portfolio ",
+  metadataBase: new URL("https://haloridho.my.id"),
+  title: {
+    default: "Ridho Hidayat — Software Engineer",
+    template: "%s | Ridho Hidayat",
+  },
+  description: "Portfolio Ridho Hidayat, software developer yang membangun website & aplikasi fungsional, cepat, dan rapi.",
+  keywords: ["Software Engineer", "Web Developer", "React", "Next.js", "Ridho Hidayat", "Portfolio"],
+  authors: [{ name: "Ridho Hidayat", url: "https://haloridho.my.id" }],
+  creator: "Ridho Hidayat",
+  openGraph: {
+    type: "website",
+    locale: "id_ID",
+    url: "https://haloridho.my.id",
+    title: "Ridho Hidayat — Software Engineer",
+    description: "Portfolio Ridho Hidayat, software developer yang membangun website & aplikasi fungsional, cepat, dan rapi.",
+    siteName: "Ridho Hidayat Portfolio",
+    images: [
+      {
+        url: "/ridho-logo2.png",
+        width: 1280,
+        height: 720,
+        alt: "Ridho Hidayat Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ridho Hidayat — Software Engineer",
+    description: "Portfolio Ridho Hidayat, software developer yang membangun website & aplikasi fungsional, cepat, dan rapi.",
+    images: ["/ridho-logo2.png"],
+    creator: "@rdhohdyat",
+  },
   icons: {
     icon: [
       { url: "/favicon/favicon.ico" },
