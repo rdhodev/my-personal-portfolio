@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { Icon } from "@iconify/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -81,8 +82,14 @@ export default function AdminLayout({
       {/* Sidebar for Desktop */}
       <aside className="hidden md:flex md:flex-col w-60 shrink-0 bg-coal-900 border-r border-coal-800 min-h-screen py-5 px-4 sticky top-0 h-screen">
         <div className="flex items-center gap-2.5 px-2 mb-8">
-          <div className="w-9 h-9 rounded-xl bg-pine-600 flex items-center justify-center">
+          <div className="w-9 h-9 rounded bg-pine-600 flex items-center justify-center">
             <Icon icon="solar:user-id-bold" className="text-white text-lg" />
+            <Image src="/ridho-logo-light.png"
+              alt="Ridho Logo"
+              width={200}
+              height={60}
+              priority
+              className="h-9 w-auto object-cover" />
           </div>
           <div className="leading-tight">
             <p className="font-semibold text-sm text-bone">Portfolio</p>

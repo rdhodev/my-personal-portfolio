@@ -1,6 +1,8 @@
 "use client";
 
 import { Icon } from "@iconify/react";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -49,10 +51,17 @@ export default function LoginPage() {
     <section className="min-h-screen bg-coal-950 flex items-center justify-center px-4 py-10 text-bone">
       <div className="w-full max-w-sm">
         <div className="flex flex-col items-center mb-8">
-          <div className="w-12 h-12 rounded-2xl bg-pine-600 flex items-center justify-center shadow-soft mb-3">
-            <Icon icon="solar:user-id-bold" className="text-white text-2xl" />
-          </div>
-          <h1 className="font-semibold text-lg text-bone font-sans">Portfolio Admin</h1>
+          <Link href="/" className="mb-3 hover:opacity-85 transition-opacity">
+            <Image
+              src="/ridho-logo.png"
+              alt="Ridho Logo"
+              width={140}
+              height={42}
+              priority
+              className="h-10 w-auto object-contain"
+            />
+          </Link>
+          <span className="text-xs font-mono text-mist uppercase tracking-wider">Portfolio Admin</span>
         </div>
 
         <div className="bg-coal-900 border border-coal-800 rounded-2xl shadow-card p-7">
