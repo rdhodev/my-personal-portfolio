@@ -66,11 +66,11 @@ export async function getCroppedImg(
   // Gambar ulang area ter-crop ke canvas bersih
   ctx.putImageData(data, 0, 0);
 
-  // Mengembalikan hasil sebagai Blob
+  // Mengembalikan hasil sebagai Blob (gunakan image/png agar mendukung transparansi)
   return new Promise((resolve) => {
     canvas.toBlob((file) => {
       resolve(file);
-    }, "image/jpeg", 0.95);
+    }, "image/png");
   });
 }
 

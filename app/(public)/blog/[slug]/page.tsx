@@ -1,18 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { useParams } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 
 interface BlogPostDetail {
-  title: string;
-  date: string;
   category: string;
-  readTime: string;
-  gradient: string;
   content: string;
+  date: string;
+  gradient: string;
+  readTime: string;
+  title: string;
   views: number;
 }
 

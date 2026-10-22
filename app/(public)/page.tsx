@@ -195,59 +195,29 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          {/* Photo card */}
+          {/* Clean Profile Photo */}
           <motion.div
             initial="hidden"
             animate="visible"
             variants={fadeLeft}
-            className="relative mx-auto w-full max-w-sm"
+            className="relative mx-auto w-full max-w-[420px] lg:max-w-[460px] h-[480px] sm:h-[530px] flex items-end justify-center select-none"
           >
-            <div
-              className="aspect-[4/5] rounded-2xl flex items-center justify-center relative overflow-hidden bg-coal-900"
-              style={{
-                boxShadow: "0 4px 12px -4px rgba(0,0,0,0.5), 0 20px 40px -12px rgba(0,0,0,0.6)",
-              }}
-            >
+            <div className="relative z-20 w-full h-full flex items-end justify-center pointer-events-auto">
               {profile?.avatar_url ? (
                 <img
                   src={profile.avatar_url}
                   alt={displayName}
-                  className="w-full h-full object-cover"
+                  className="h-full w-auto max-w-none object-contain object-bottom filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)] transition-transform duration-500 hover:scale-105 origin-bottom"
                 />
               ) : (
                 <div
-                  className="w-full h-full flex items-center justify-center"
+                  className="w-full h-full flex items-center justify-center rounded-2xl"
                   style={{ background: "linear-gradient(135deg, #279E60, #0D2B1C)" }}
                 >
                   <Icon icon="solar:user-id-bold" className="text-white/10 text-[10rem]" />
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-coal-950/50 via-transparent to-transparent" />
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute -bottom-8 left-1/2 -translate-x-1/2 sm:-left-6 sm:translate-x-0 lg:-left-12 rounded-xl p-4 w-64 font-mono text-[11px] leading-relaxed"
-              style={{
-                background: "#0A0D0B",
-                border: "1px solid rgba(39,158,96,0.4)",
-                boxShadow: "0 0 0 1px rgba(63,187,125,0.18), 0 18px 40px -16px rgba(39,158,96,0.35)",
-              }}
-            >
-              <div className="flex items-center gap-1.5 mb-2.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
-                <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
-                <span className="w-2.5 h-2.5 rounded-full bg-pine-400/80" />
-              </div>
-              <p><span className="text-pine-300">const</span> <span className="text-pine-400">developer</span> = {"{"}</p>
-              <p className="pl-3">name: <span className="text-mist">&quot;{displayName}&quot;</span>,</p>
-              <p className="pl-3">role: <span className="text-mist">&quot;{displayRole}&quot;</span>,</p>
-              <p className="pl-3">base: <span className="text-mist">&quot;Pekanbaru, ID&quot;</span>,</p>
-              <p className="pl-3">status: <span className="text-pine-300">&quot;{profile?.is_available !== false ? "available" : "unavailable"}&quot;</span></p>
-              <p>{"}"}</p>
-            </motion.div>
           </motion.div>
         </div>
       </section>

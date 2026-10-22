@@ -121,13 +121,13 @@ export default function AdminProfilePage() {
       const croppedBlob = await getCroppedImg(imageSrc, croppedAreaPixels);
       if (!croppedBlob) throw new Error("Gagal memotong gambar.");
 
-      const fileName = `avatar-${Date.now()}.jpg`;
+      const fileName = `avatar-${Date.now()}.png`;
       const filePath = `profile/${fileName}`;
 
       const { data, error } = await supabase.storage
         .from("portfolio-assets")
         .upload(filePath, croppedBlob, {
-          contentType: "image/jpeg",
+          contentType: "image/png",
           cacheControl: "3600",
           upsert: true,
         });
