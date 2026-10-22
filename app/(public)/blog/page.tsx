@@ -3,27 +3,27 @@
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 
 interface BlogPost {
   id: string;
-  title: string;
-  excerpt: string;
-  date: string;
   category: string;
-  readTime: string;
+  date: string;
+  excerpt: string;
   gradient: string;
-  views?: number;
+  readTime: string;
   slug: string;
+  title: string;
+  views?: number;
 }
 
 interface TrendingPost {
   id: string;
-  title: string;
   category: string;
-  views: number;
   slug: string;
+  title: string;
+  views: number;
 }
 
 const CATEGORIES = ["All", "Development", "Design", "Productivity", "Trends"];
@@ -105,7 +105,7 @@ export default function BlogPage() {
       <div className="pointer-events-none absolute -top-40 -right-32 w-[28rem] h-[28rem] rounded-full bg-pine-700/10 blur-[100px]" />
       <div className="pointer-events-none absolute bottom-1/3 -left-32 w-[28rem] h-[28rem] rounded-full bg-teal-900/10 blur-[100px]" />
 
-      <div className="max-w-6xl mx-auto px-5 md:px-8 relative z-10">
+      <div className="max-w-5xl mx-auto px-4 relative z-10">
         <div className="mb-12">
           <Link href="/" className="inline-flex items-center gap-1 text-xs text-mist hover:text-pine-400 font-mono transition mb-6">
             <Icon icon="solar:arrow-left-linear" /> Back to Home

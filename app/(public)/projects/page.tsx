@@ -87,7 +87,7 @@ export default function ProjectsPage() {
       <div className="pointer-events-none absolute -top-40 -right-32 w-[32rem] h-[32rem] rounded-full bg-pine-700/10 blur-[120px]" />
       <div className="pointer-events-none absolute bottom-1/3 -left-32 w-[28rem] h-[28rem] rounded-full bg-teal-900/10 blur-[100px]" />
 
-      <div className="max-w-6xl mx-auto px-5 md:px-8 relative z-10">
+      <div className="max-w-5xl mx-auto px-4 relative z-10">
 
         {/* ── Header ──────────────────────────────────────────────────────── */}
         <motion.div
@@ -143,18 +143,17 @@ export default function ProjectsPage() {
             initial="hidden"
             animate="visible"
             variants={stagger}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {projects.map((proj) => (
               <motion.div
                 key={proj.id}
                 variants={fadeUp}
-                whileHover={{ x: -3, y: -3 }}
-                className="group rounded-sm overflow-hidden flex flex-col border-2 border-coal-700 bg-coal-900 transition-all hover:border-pine-400 hover:shadow-[5px_5px_0px_#1F7A4C]"
-                style={{ boxShadow: "4px 4px 0px #000000" }}
+                whileHover={{ y: -3 }}
+                className="group flex flex-col transition-all duration-300"
               >
-                {/* Cover Image / Gradient */}
-                <div className="relative overflow-hidden h-44 shrink-0 border-b-2 border-coal-700">
+                {/* Image: bordered, no card border */}
+                <div className="relative overflow-hidden aspect-[4/3] w-full border border-coal-700 mb-4 shrink-0">
                   {proj.image_url ? (
                     <img
                       src={proj.image_url}
@@ -163,94 +162,62 @@ export default function ProjectsPage() {
                     />
                   ) : (
                     <div className={`w-full h-full bg-gradient-to-br ${proj.gradient} flex items-center justify-center`}>
-                      <Icon icon="solar:widget-4-bold-duotone" className="text-white/30 text-5xl" />
+                      <Icon icon="solar:widget-4-bold-duotone" className="text-white/40 text-6xl" />
                     </div>
                   )}
-
-                  {/* Overlay on hover */}
-                  <div className="absolute inset-0 bg-coal-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                    {proj.demo_url && (
-                      <a
-                        href={proj.demo_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1.5 px-3 py-2 bg-pine-400 text-coal-950 text-xs font-bold rounded-sm hover:bg-pine-300 transition"
-                      >
-                        <Icon icon="solar:global-linear" /> Live Demo
-                      </a>
-                    )}
-                    {proj.github_url && (
-                      <a
-                        href={proj.github_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1.5 px-3 py-2 bg-coal-800 border border-coal-700 text-bone text-xs font-bold rounded-sm hover:bg-coal-700 transition"
-                      >
-                        <Icon icon="mdi:github" /> GitHub
-                      </a>
-                    )}
-                  </div>
-
-                  {/* Featured badge */}
                   {proj.is_featured && (
-                    <span
-                      className="absolute top-3 left-3 text-yellow-300 text-[10px] font-mono font-semibold px-2 py-0.5 rounded-sm flex items-center gap-1"
-                      style={{ background: "rgba(5,7,5,0.85)", border: "1px solid rgba(161,130,49,0.4)" }}
-                    >
-                      <Icon icon="solar:star-bold" className="text-yellow-400" /> FEATURED
+                    <span className="absolute top-3 left-3 text-coal-950 bg-pine-400 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full">
+                      FEATURED
                     </span>
                   )}
                 </div>
 
-                {/* Content */}
-                <div className="p-4 sm:p-5 flex flex-col flex-1">
-                  <h2 className="font-display font-bold text-bone text-base mb-1 group-hover:text-pine-400 transition leading-snug">
-                    {proj.title}
-                  </h2>
-                  <p className="text-xs text-mist leading-relaxed mb-3 flex-1 line-clamp-3">
-                    {proj.description}
-                  </p>
+                {/* Text content — no border, no card bg */}
+                <h2 className="font-display font-bold text-base text-bone leading-snug mb-1.5 group-hover:text-pine-400 transition-colors duration-200">
+                  {proj.title}
+                </h2>
+                <p className="text-xs text-mist leading-relaxed mb-3 line-clamp-2 flex-1">
+                  {proj.description}
+                </p>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {proj.tags.map((tag) => (
+                {/* Tags */}
+                {proj.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mb-3">
+                    {proj.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="text-[10px] font-mono text-pine-300 px-2 py-0.5 rounded-sm border border-pine-900/60"
-                        style={{ background: "rgba(13,43,28,0.5)" }}
+                        className="text-[10px] font-mono text-mist px-2.5 py-0.5 rounded-full border border-coal-600"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
+                )}
 
-                  {/* Links */}
-                  <div className="flex items-center gap-3 pt-3 border-t border-coal-800">
-                    {proj.demo_url ? (
-                      <a
-                        href={proj.demo_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-pine-400 hover:text-pine-300 transition"
-                      >
-                        <Icon icon="solar:global-linear" /> Live Demo
-                      </a>
-                    ) : (
-                      <span className="text-xs text-coal-600 italic">No live demo</span>
-                    )}
-                    {proj.github_url && (
-                      <a
-                        href={proj.github_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-mist hover:text-bone transition ml-auto"
-                      >
-                        <Icon icon="mdi:github" className="text-base" /> GitHub
-                      </a>
-                    )}
-                  </div>
+                {/* Links */}
+                <div className="flex items-center gap-2 pt-3 border-t border-coal-800">
+                  {proj.demo_url ? (
+                    <a
+                      href={proj.demo_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-pine-400 bg-pine-900/30 hover:bg-pine-900/60 border border-pine-800/60 hover:border-pine-600 px-2.5 py-1 transition rounded-sm"
+                    >
+                      <Icon icon="solar:global-linear" /> Live Demo
+                    </a>
+                  ) : (
+                    <span className="text-[11px] text-coal-600 italic">No live demo</span>
+                  )}
+                  {proj.github_url && (
+                    <a
+                      href={proj.github_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-mist hover:text-bone bg-coal-800/50 hover:bg-coal-700/60 border border-coal-700 hover:border-coal-500 px-2.5 py-1 transition rounded-sm ml-auto"
+                    >
+                      <Icon icon="mdi:github" className="text-sm" /> GitHub
+                    </a>
+                  )}
                 </div>
               </motion.div>
             ))}

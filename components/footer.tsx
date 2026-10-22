@@ -3,7 +3,7 @@ import { Icon } from "@iconify/react";
 export default function Footer() {
   return (
     <footer className="bg-coal-950 border-t border-coal-700 py-8 font-sans">
-      <div className="max-w-6xl mx-auto px-5 md:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm text-mist">
           &copy; {new Date().getFullYear()} Ridho Hidayat. All rights reserved.
         </p>

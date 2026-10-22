@@ -104,7 +104,7 @@ export default function Home() {
     fetchAll();
   }, []);
 
-  const skillGroups = ["Mobile", "Web", "AI", "Tools", "Others"].map((cat) => ({
+  const skillGroups = ["Programming", "Mobile", "Web", "AI", "Tools", "Others"].map((cat) => ({
     label: cat,
     skills: skills.filter((s) => s.category === cat),
   })).filter((g) => g.skills.length > 0);
@@ -372,7 +372,7 @@ export default function Home() {
             <motion.h2 variants={staggerItem} className="font-display font-bold text-xl sm:text-2xl text-bone mb-8 tracking-tight">
               Selected projects
             </motion.h2>
-            <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {projects.slice(0, 6).map((proj) => (
                 <motion.a
                   key={proj.id}
@@ -380,12 +380,11 @@ export default function Home() {
                   target={proj.demo_url || proj.github_url ? "_blank" : undefined}
                   rel="noopener noreferrer"
                   variants={staggerItem}
-                  whileHover={{ x: -3, y: -3 }}
-                  className="group rounded-sm overflow-hidden block border-2 border-coal-700 bg-coal-900 transition-all hover:border-pine-400 hover:shadow-[5px_5px_0px_#1F7A4C]"
-                  style={{ boxShadow: "4px 4px 0px #000000" }}
+                  whileHover={{ y: -3 }}
+                  className="group block transition-all duration-300"
                 >
-                  {/* Cover: show image if available, otherwise gradient */}
-                  <div className={`h-44 relative overflow-hidden flex items-center justify-center border-b-2 border-coal-700`}>
+                  {/* Image: bordered and rounded, no card border */}
+                  <div className="relative overflow-hidden aspect-[4/3] w-full border border-coal-700 mb-4">
                     {proj.image_url ? (
                       <img
                         src={proj.image_url}
@@ -394,27 +393,56 @@ export default function Home() {
                       />
                     ) : (
                       <div className={`w-full h-full bg-gradient-to-br ${proj.gradient} flex items-center justify-center`}>
-                        <Icon icon="solar:widget-4-bold-duotone" className="text-white/50 text-5xl" />
+                        <Icon icon="solar:widget-4-bold-duotone" className="text-white/40 text-6xl" />
                       </div>
                     )}
                     {proj.is_featured && (
-                      <span
-                        className="absolute top-2 left-2 text-coal-950 bg-pine-400 text-[10px] font-mono font-bold px-2 py-0.5 border border-coal-950 shadow-[2px_2px_0px_#000000]"
-                      >
+                      <span className="absolute top-3 left-3 text-coal-950 bg-pine-400 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full">
                         FEATURED
                       </span>
                     )}
                   </div>
-                  <div className="p-5">
-                    <h3 className="font-display font-bold text-bone mb-1 group-hover:text-pine-400 transition">{proj.title}</h3>
-                    <p className="text-xs text-mist mb-3 leading-relaxed">{proj.description}</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {proj.tags.map((tag) => (
-                        <span key={tag} className="text-[10px] font-mono text-pine-300 px-2 py-0.5 bg-coal-950 border border-pine-800">
+
+                  {/* Text content — no border, no card bg */}
+                  <h3 className="font-display font-bold text-base text-bone leading-snug mb-1.5 group-hover:text-pine-400 transition-colors duration-200">
+                    {proj.title}
+                  </h3>
+                  <p className="text-xs text-mist leading-relaxed mb-3 line-clamp-2">
+                    {proj.description}
+                  </p>
+                  {proj.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {proj.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] font-mono text-mist px-2.5 py-0.5 rounded-full border border-coal-600"
+                        >
                           {tag}
                         </span>
                       ))}
                     </div>
+                  )}
+
+                  {/* Links */}
+                  <div className="flex items-center gap-2 pt-3 border-t border-coal-800">
+                    {proj.demo_url ? (
+                      <button
+                        onClick={(e) => { e.preventDefault(); window.open(proj.demo_url!, "_blank"); }}
+                        className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-pine-400 bg-pine-900/30 hover:bg-pine-900/60 border border-pine-800/60 hover:border-pine-600 px-2.5 py-1 transition cursor-pointer rounded-sm"
+                      >
+                        <Icon icon="solar:global-linear" /> Live Demo
+                      </button>
+                    ) : (
+                      <span className="text-[11px] text-coal-600 italic">No live demo</span>
+                    )}
+                    {proj.github_url && (
+                      <button
+                        onClick={(e) => { e.preventDefault(); window.open(proj.github_url!, "_blank"); }}
+                        className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-mist hover:text-bone bg-coal-800/50 hover:bg-coal-700/60 border border-coal-700 hover:border-coal-500 px-2.5 py-1 transition cursor-pointer rounded-sm ml-auto"
+                      >
+                        <Icon icon="mdi:github" className="text-sm" /> GitHub
+                      </button>
+                    )}
                   </div>
                 </motion.a>
               ))}
@@ -467,27 +495,57 @@ export default function Home() {
 
       {/* ── SERVICES ─────────────────────────────────────────────────────── */}
       {services.length > 0 && (
-        <section id="services" className="max-w-6xl mx-auto px-4 py-20 md:py-28">
+        <section id="services" className="max-w-5xl mx-auto px-4 py-20 md:py-28">
           <RevealSection>
             <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// services</motion.p>
-            <motion.h2 variants={staggerItem} className="font-display font-bold text-xl sm:text-2xl text-bone mb-8 tracking-tight">
-              How I can help you
-            </motion.h2>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+              <motion.h2 variants={staggerItem} className="font-display font-bold text-xl sm:text-2xl text-bone tracking-tight">
+                How I can help you
+              </motion.h2>
+              <motion.p variants={staggerItem} className="text-xs text-mist font-mono">
+                Available for freelance &amp; contracts
+              </motion.p>
+            </div>
             <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {services.map((srv) => (
+              {services.map((srv, idx) => (
                 <motion.div
                   key={srv.id}
                   variants={staggerItem}
-                  whileHover={{ x: -3, y: -3 }}
-                  className="rounded-sm p-6 bg-coal-900 border-2 border-coal-700 transition-all hover:border-pine-400 hover:shadow-[5px_5px_0px_#1F7A4C]"
-                  style={{ boxShadow: "4px 4px 0px #000000" }}
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.25 }}
+                  className="group relative rounded-sm p-6 flex flex-col justify-between overflow-hidden transition-all duration-300 border border-coal-700/80 hover:border-pine-500/70"
+                  style={{
+                    background: "linear-gradient(180deg, #0e120f 0%, #080a09 100%)",
+                    boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.5)",
+                  }}
                 >
-                  <div className="w-10 h-10 rounded-sm flex items-center justify-center mb-4 bg-coal-950 border-2 border-pine-500 shadow-[2px_2px_0px_#1F7A4C]">
-                    <Icon icon={srv.icon} className="text-pine-400 text-xl" />
+                  {/* Subtle top gradient glow on hover */}
+                  <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-48 h-24 bg-pine-500/10 blur-2xl group-hover:bg-pine-500/20 transition-all duration-500" />
+
+                  {/* Corner indicator */}
+                  <div className="absolute top-0 right-0 w-8 h-8 pointer-events-none overflow-hidden">
+                    <div className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-pine-500/40 group-hover:border-pine-400 transition-colors" />
                   </div>
-                  <h3 className="font-bold text-bone mb-1.5 font-display">{srv.title}</h3>
-                  <p className="text-xs text-mist leading-relaxed mb-4">{srv.description}</p>
-                  <p className="font-mono text-xs text-pine-400 font-semibold">{srv.price}</p>
+
+                  <div>
+                    {/* Header: Icon & Index number */}
+                    <div className="flex items-center justify-between mb-5">
+                      <div className="w-12 h-12 rounded-sm flex items-center justify-center bg-coal-900/90 border border-coal-700/80 text-pine-400 group-hover:border-pine-500/60 group-hover:bg-pine-950/40 group-hover:text-pine-300 group-hover:shadow-[0_0_15px_rgba(63,187,125,0.15)] transition-all duration-300">
+                        <Icon icon={srv.icon || "solar:widget-bold-duotone"} className="text-2xl transition-transform duration-300 group-hover:scale-110" />
+                      </div>
+                      <span className="font-mono text-[11px] font-semibold text-coal-500 group-hover:text-pine-500/60 transition-colors">
+                        0{idx + 1}
+                      </span>
+                    </div>
+
+                    {/* Title & Description */}
+                    <h3 className="font-display font-bold text-base sm:text-lg text-bone mb-2 group-hover:text-pine-400 transition-colors duration-200">
+                      {srv.title}
+                    </h3>
+                    <p className="text-xs text-mist leading-relaxed mb-6 font-sans">
+                      {srv.description}
+                    </p>
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
