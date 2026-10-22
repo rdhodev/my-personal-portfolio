@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { Fredoka, Geist_Mono } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const fredoka = Fredoka({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-fredoka",
-});
-
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
+  variable: "--font-jetbrains",
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -32,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${fredoka.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>

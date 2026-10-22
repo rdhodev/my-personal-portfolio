@@ -57,7 +57,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center">
             <Link
               href="#contact"
-              className="inline-flex items-center gap-1.5 bg-pine-400 text-coal-950 text-xs font-bold px-4 py-2 rounded-full hover:bg-pine-300 transition"
+              className="inline-flex items-center gap-1.5 bg-pine-400 text-coal-950 text-xs font-bold px-4 py-2 rounded-sm hover:bg-pine-300 transition"
             >
               <Icon icon="solar:letter-linear" />
               Let's Talk
@@ -68,7 +68,7 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg border border-coal-600 text-mist hover:text-bone"
+              className="p-2 rounded-sm border border-coal-600 text-mist hover:text-bone"
             >
               <Icon icon={isOpen ? "solar:close-square-linear" : "solar:hamburger-menu-linear"} className="text-xl" />
             </button>

@@ -131,29 +131,40 @@ export default function Home() {
             animate="visible"
             variants={stagger}
           >
+            {/* Brutalist Hello Tag with corner handles */}
+            <motion.div variants={fadeUp} className="inline-block mb-4">
+              <div className="relative inline-flex items-center gap-1.5 px-3 py-1 bg-coal-900 border-2 border-pine-500 font-mono text-xs text-pine-400 font-semibold shadow-[3px_3px_0px_#1F7A4C]">
+                {/* 4 Corner handles (brutalist design selector) */}
+                <span className="absolute -top-1 -left-1 w-2 h-2 bg-pine-400 border border-coal-950" />
+                <span className="absolute -top-1 -right-1 w-2 h-2 bg-pine-400 border border-coal-950" />
+                <span className="absolute -bottom-1 -left-1 w-2 h-2 bg-pine-400 border border-coal-950" />
+                <span className="absolute -bottom-1 -right-1 w-2 h-2 bg-pine-400 border border-coal-950" />
+                <span>Hi everyone 👋, I'm {displayName}</span>
+              </div>
+            </motion.div>
 
             <motion.h1
               variants={fadeUp}
               custom={0.08}
-              className="font-display font-semibold text-[2.5rem] leading-[1.08] sm:text-5xl lg:text-[3.4rem] text-bone mb-5"
+              className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-bone mb-4 tracking-tight leading-snug"
             >
               Building products<br className="hidden sm:block" />
               {" "}that feel{" "}
-              <span className="text-pine-400">obvious</span> to use.
+              <span className="text-pine-400 underline decoration-pine-500 decoration-wavy decoration-2">obvious</span> to use.
             </motion.h1>
 
             <motion.p
               variants={fadeUp}
               custom={0.16}
-              className="text-mist text-base sm:text-lg max-w-md mb-8 leading-relaxed"
+              className="text-mist text-xs sm:text-sm max-w-md mb-7 leading-relaxed font-mono"
             >
               I'm {displayName.split(" ")[0]}, {displayRole.toLowerCase()} at Pekanbaru. {displayHeroHeadline}
             </motion.p>
 
-            <motion.div variants={fadeUp} custom={0.24} className="flex flex-wrap items-center gap-3 mb-10">
+            <motion.div variants={fadeUp} custom={0.24} className="flex flex-wrap items-center gap-4 mb-10">
               <a
                 href="#work"
-                className="inline-flex items-center gap-2 bg-pine-400 text-coal-950 text-sm font-semibold px-5 py-3 rounded-full hover:bg-pine-300 transition"
+                className="brutal-btn inline-flex items-center gap-2 bg-pine-400 text-coal-950 text-sm font-bold px-6 py-2.5 rounded-sm hover:bg-pine-300"
               >
                 View my work <Icon icon="solar:arrow-right-linear" />
               </a>
@@ -162,32 +173,30 @@ export default function Home() {
                   href={profile.resume_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-bone text-sm font-medium px-5 py-3 rounded-full transition hover:border-pine-500/60"
-                  style={{ background: "#0A0D0B", border: "1px solid #212922" }}
+                  className="brutal-btn inline-flex items-center gap-2 bg-coal-900 text-bone text-sm font-bold px-6 py-2.5 rounded-sm hover:bg-coal-800 border-2 border-coal-600"
                 >
                   <Icon icon="solar:download-minimalistic-linear" /> Download CV
                 </a>
               ) : (
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-2 text-bone text-sm font-medium px-5 py-3 rounded-full transition hover:border-pine-500/60"
-                  style={{ background: "#0A0D0B", border: "1px solid #212922" }}
+                  className="brutal-btn inline-flex items-center gap-2 bg-coal-900 text-bone text-sm font-bold px-6 py-2.5 rounded-sm hover:bg-coal-800 border-2 border-coal-600"
                 >
                   <Icon icon="solar:letter-linear" /> Contact Me
                 </a>
               )}
             </motion.div>
 
-            <motion.div variants={fadeUp} custom={0.32} className="flex items-center gap-6 text-xs text-mist">
+            <motion.div variants={fadeUp} custom={0.32} className="flex items-center gap-6 text-xs text-mist font-mono">
               {[
-                { label: "years experience", value: "4+" },
-                { label: "projects shipped", value: `${projects.length || "30"}+` },
+                { label: "years exp", value: "4+" },
+                { label: "projects", value: `${projects.length || "30"}+` },
                 { label: "happy clients", value: "18" },
               ].map((stat, i) => (
                 <div key={i} className="flex items-center gap-6">
-                  {i > 0 && <div className="w-px h-8 bg-coal-600" />}
+                  {i > 0 && <div className="w-0.5 h-7 bg-coal-700" />}
                   <div>
-                    <span className="text-bone font-semibold text-sm block">{stat.value}</span>
+                    <span className="text-pine-400 font-bold text-base block">{stat.value}</span>
                     {stat.label}
                   </div>
                 </div>
@@ -195,26 +204,32 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          {/* Clean Profile Photo */}
+          {/* Brutalist Profile Photo Container with Geometric Backdrops */}
           <motion.div
             initial="hidden"
             animate="visible"
             variants={fadeLeft}
-            className="relative mx-auto w-full max-w-[420px] lg:max-w-[460px] h-[480px] sm:h-[530px] flex items-end justify-center select-none"
+            className="relative mx-auto w-full max-w-[260px] sm:max-w-[290px] lg:max-w-[310px] aspect-[4/5] flex items-center justify-center select-none"
           >
-            <div className="relative z-20 w-full h-full flex items-end justify-center pointer-events-auto">
+            {/* Brutalist offset background boxes */}
+            <div className="absolute inset-0 bg-pine-500 translate-x-2.5 translate-y-2.5 rounded-sm border-2 border-coal-950" />
+            <div className="absolute inset-0 bg-coal-900 rounded-sm border-2 border-pine-400/80 shadow-[5px_5px_0px_#000000] overflow-hidden">
+              {/* Corner accent marks */}
+              <div className="absolute top-2 left-2 z-30 font-mono text-[10px] text-pine-400 font-bold px-1.5 py-0.5 bg-coal-950/80 border border-pine-500/40">
+                [DEV::PROFILE]
+              </div>
+
               {profile?.avatar_url ? (
                 <img
                   src={profile.avatar_url}
                   alt={displayName}
-                  className="h-full w-auto max-w-none object-contain object-bottom filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)] transition-transform duration-500 hover:scale-105 origin-bottom"
+                  className="w-full h-full object-cover object-top filter grayscale contrast-125 hover:grayscale-0 transition-all duration-300"
                 />
               ) : (
                 <div
-                  className="w-full h-full flex items-center justify-center rounded-2xl"
-                  style={{ background: "linear-gradient(135deg, #279E60, #0D2B1C)" }}
+                  className="w-full h-full flex items-center justify-center bg-coal-900"
                 >
-                  <Icon icon="solar:user-id-bold" className="text-white/10 text-[10rem]" />
+                  <Icon icon="solar:user-id-bold" className="text-pine-400/30 text-8xl" />
                 </div>
               )}
             </div>
@@ -230,17 +245,17 @@ export default function Home() {
           </motion.p>
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
             <div className="lg:col-span-3">
-              <motion.h2 variants={staggerItem} className="font-display font-semibold text-2xl sm:text-3xl text-bone mb-5">
+              <motion.h2 variants={staggerItem} className="font-display font-bold text-xl sm:text-2xl text-bone mb-3 tracking-tight">
                 A little about me
               </motion.h2>
-              <motion.p variants={staggerItem} className="text-mist leading-relaxed mb-4">
+              <motion.p variants={staggerItem} className="text-mist leading-relaxed mb-4 text-xs sm:text-sm">
                 {displayAbout}
               </motion.p>
-              <motion.div variants={staggerItem} className="flex flex-wrap gap-2.5">
+              <motion.div variants={staggerItem} className="flex flex-wrap gap-2">
                 {(displayRole.split("&").map(s => s.trim())).concat(["Performance"]).map((tag) => (
                   <span
                     key={tag}
-                    className="font-mono text-xs text-mist px-3 py-1.5 rounded-full"
+                    className="font-mono text-xs text-mist px-3 py-1.5 rounded-sm"
                     style={{ background: "#0A0D0B", border: "1px solid #212922" }}
                   >
                     {tag}
@@ -251,23 +266,24 @@ export default function Home() {
 
             <div className="lg:col-span-2 grid grid-cols-2 gap-4">
               {[
-                { highlight: false, icon: "solar:gallery-wide-bold-duotone", label: "Projects in portfolio", value: String(projects.length || "—") },
-                { highlight: false, icon: "solar:diploma-verified-bold-duotone", label: "Certificates earned", value: String(certificates.length || "—") },
-                { highlight: false, icon: "solar:case-round-minimalistic-bold-duotone", label: "Roles held", value: String(experiences.length || "—") },
-                { highlight: true, icon: "solar:map-point-bold-duotone", label: "Riau, Indonesia", value: "Pekanbaru" },
+                { highlight: false, icon: "solar:gallery-wide-bold-duotone", label: "Projects", value: String(projects.length || "—") },
+                { highlight: false, icon: "solar:diploma-verified-bold-duotone", label: "Certificates", value: String(certificates.length || "—") },
+                { highlight: false, icon: "solar:case-round-minimalistic-bold-duotone", label: "Experience", value: String(experiences.length || "—") },
+                { highlight: true, icon: "solar:map-point-bold-duotone", label: "Location", value: "Pekanbaru" },
               ].map((stat, i) => (
                 <motion.div
                   key={i}
                   variants={staggerItem}
-                  className="rounded-2xl shadow-soft p-5"
+                  className="rounded-sm p-4 border-2 transition-transform hover:-translate-y-1"
                   style={{
-                    background: stat.highlight ? "rgba(13,43,28,0.4)" : "#0A0D0B",
-                    border: stat.highlight ? "1px solid rgba(23,92,58,0.5)" : "1px solid #171D18",
+                    background: stat.highlight ? "#0D2B1C" : "#0A0D0B",
+                    borderColor: stat.highlight ? "#3FBB7D" : "#212922",
+                    boxShadow: stat.highlight ? "4px 4px 0px #1F7A4C" : "4px 4px 0px #000000",
                   }}
                 >
-                  <Icon icon={stat.icon} className={`text-2xl mb-2 ${stat.highlight ? "text-pine-300" : "text-pine-400"}`} />
-                  <p className="font-display font-semibold text-xl text-bone">{stat.value}</p>
-                  <p className="text-xs text-mist">{stat.label}</p>
+                  <Icon icon={stat.icon} className={`text-2xl mb-1 ${stat.highlight ? "text-pine-300" : "text-pine-400"}`} />
+                  <p className="font-bold font-mono text-xl text-bone">{stat.value}</p>
+                  <p className="text-[11px] font-mono text-mist">{stat.label}</p>
                 </motion.div>
               ))}
             </div>
@@ -279,7 +295,7 @@ export default function Home() {
       <section id="skills" className="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
         <RevealSection>
           <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// skills</motion.p>
-          <motion.h2 variants={staggerItem} className="font-display font-semibold text-2xl sm:text-3xl text-bone mb-12">
+          <motion.h2 variants={staggerItem} className="font-display font-bold text-xl sm:text-2xl text-bone mb-8 tracking-tight">
             Tools I use on a daily basis
           </motion.h2>
           {skillGroups.length === 0 ? (
@@ -306,7 +322,7 @@ export default function Home() {
         <section id="experience" className="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
           <RevealSection>
             <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// experience</motion.p>
-            <motion.h2 variants={staggerItem} className="font-display font-semibold text-2xl sm:text-3xl text-bone mb-12">
+            <motion.h2 variants={staggerItem} className="font-display font-bold text-xl sm:text-2xl text-bone mb-8 tracking-tight">
               Work experience
             </motion.h2>
             <div className="relative pl-8 max-w-3xl">
@@ -314,10 +330,10 @@ export default function Home() {
               {experiences.map((exp) => (
                 <motion.div key={exp.id} variants={staggerItem} className="relative mb-10 last:mb-0">
                   <div
-                    className="absolute -left-8 top-1 w-3.5 h-3.5 rounded-full"
+                    className="absolute -left-8 top-1 w-3 h-3 rounded-sm"
                     style={{
                       background: exp.is_current ? "#3FBB7D" : "#212922",
-                      boxShadow: exp.is_current ? "0 0 0 4px rgba(13,43,28,0.4)" : "0 0 0 4px #050705",
+                      boxShadow: exp.is_current ? "0 0 0 3px rgba(13,43,28,0.5)" : "0 0 0 3px #050705",
                     }}
                   />
                   <span className="font-mono text-xs text-mist">{exp.period}</span>
@@ -336,7 +352,7 @@ export default function Home() {
         <section id="work" className="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
           <RevealSection>
             <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// recent work</motion.p>
-            <motion.h2 variants={staggerItem} className="font-display font-semibold text-2xl sm:text-3xl text-bone mb-12">
+            <motion.h2 variants={staggerItem} className="font-display font-bold text-xl sm:text-2xl text-bone mb-8 tracking-tight">
               Selected projects
             </motion.h2>
             <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -347,13 +363,12 @@ export default function Home() {
                   target={proj.demo_url || proj.github_url ? "_blank" : undefined}
                   rel="noopener noreferrer"
                   variants={staggerItem}
-                  whileHover={{ y: -4 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="group rounded-2xl overflow-hidden block"
-                  style={{ background: "#0A0D0B", border: "1px solid #171D18" }}
+                  whileHover={{ y: -3, x: -3 }}
+                  className="group rounded-sm overflow-hidden block border-2 border-coal-700 bg-coal-900 transition-all hover:border-pine-400 hover:shadow-[5px_5px_0px_#1F7A4C]"
+                  style={{ boxShadow: "4px 4px 0px #000000" }}
                 >
                   {/* Cover: show image if available, otherwise gradient */}
-                  <div className={`h-44 relative overflow-hidden flex items-center justify-center`}>
+                  <div className={`h-44 relative overflow-hidden flex items-center justify-center border-b-2 border-coal-700`}>
                     {proj.image_url ? (
                       <img
                         src={proj.image_url}
@@ -367,19 +382,18 @@ export default function Home() {
                     )}
                     {proj.is_featured && (
                       <span
-                        className="absolute top-3 left-3 text-pine-300 text-[10px] font-mono px-2.5 py-1 rounded-full"
-                        style={{ background: "rgba(5,7,5,0.8)", border: "1px solid rgba(23,92,58,0.5)" }}
+                        className="absolute top-2 left-2 text-coal-950 bg-pine-400 text-[10px] font-mono font-bold px-2 py-0.5 border border-coal-950 shadow-[2px_2px_0px_#000000]"
                       >
                         FEATURED
                       </span>
                     )}
                   </div>
                   <div className="p-5">
-                    <h3 className="font-display font-semibold text-bone mb-1 group-hover:text-pine-400 transition">{proj.title}</h3>
-                    <p className="text-sm text-mist mb-3 leading-relaxed">{proj.description}</p>
+                    <h3 className="font-display font-bold text-bone mb-1 group-hover:text-pine-400 transition">{proj.title}</h3>
+                    <p className="text-xs text-mist mb-3 leading-relaxed">{proj.description}</p>
                     <div className="flex flex-wrap gap-1.5">
                       {proj.tags.map((tag) => (
-                        <span key={tag} className="text-[10px] font-mono text-pine-300 px-2 py-0.5 rounded-full" style={{ background: "rgba(13,43,28,0.5)" }}>
+                        <span key={tag} className="text-[10px] font-mono text-pine-300 px-2 py-0.5 bg-coal-950 border border-pine-800">
                           {tag}
                         </span>
                       ))}
@@ -393,7 +407,7 @@ export default function Home() {
               <motion.div variants={staggerItem} className="flex justify-center mt-12">
                 <Link
                   href="/projects"
-                  className="inline-flex items-center gap-2 border border-coal-700 hover:border-pine-500/60 bg-coal-900 text-bone hover:text-pine-400 text-sm font-semibold px-6 py-3 rounded-full transition duration-300"
+                  className="inline-flex items-center gap-2 border border-coal-700 hover:border-pine-500/60 bg-coal-900 text-bone hover:text-pine-400 text-sm font-semibold px-6 py-2.5 rounded-sm transition duration-300"
                 >
                   View All Projects <Icon icon="solar:arrow-right-linear" />
                 </Link>
@@ -408,7 +422,7 @@ export default function Home() {
         <section id="certificates" className="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
           <RevealSection>
             <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// certificates</motion.p>
-            <motion.h2 variants={staggerItem} className="font-display font-semibold text-2xl sm:text-3xl text-bone mb-12">
+            <motion.h2 variants={staggerItem} className="font-display font-bold text-xl sm:text-2xl text-bone mb-8 tracking-tight">
               Certificates &amp; credentials
             </motion.h2>
             <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-3 gap-5">
@@ -417,10 +431,10 @@ export default function Home() {
                   key={cert.id}
                   variants={staggerItem}
                   whileHover={{ y: -3 }}
-                  className="rounded-2xl shadow-soft p-5 flex items-start gap-3.5"
-                  style={{ background: "#0A0D0B", border: "1px solid #171D18" }}
+                  className="rounded-sm p-5 flex items-start gap-3.5"
+                  style={{ background: "#0A0D0B", border: "1px solid #212922" }}
                 >
-                  <div className={`w-11 h-11 rounded-lg bg-gradient-to-br ${cert.color} flex items-center justify-center shrink-0`}>
+                  <div className={`w-10 h-10 rounded-sm bg-gradient-to-br ${cert.color} flex items-center justify-center shrink-0`}>
                     <Icon icon="solar:diploma-verified-bold-duotone" className="text-white/90 text-lg" />
                   </div>
                   <div>
@@ -439,7 +453,7 @@ export default function Home() {
         <section id="services" className="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
           <RevealSection>
             <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// services</motion.p>
-            <motion.h2 variants={staggerItem} className="font-display font-semibold text-2xl sm:text-3xl text-bone mb-12">
+            <motion.h2 variants={staggerItem} className="font-display font-bold text-xl sm:text-2xl text-bone mb-8 tracking-tight">
               How I can help you
             </motion.h2>
             <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -447,16 +461,16 @@ export default function Home() {
                 <motion.div
                   key={srv.id}
                   variants={staggerItem}
-                  whileHover={{ borderColor: "rgba(31,122,76,0.6)", y: -3 }}
-                  className="rounded-2xl p-6 transition-colors"
-                  style={{ background: "#0A0D0B", border: "1px solid #171D18" }}
+                  whileHover={{ y: -3, x: -3 }}
+                  className="rounded-sm p-6 bg-coal-900 border-2 border-coal-700 transition-all hover:border-pine-400 hover:shadow-[5px_5px_0px_#1F7A4C]"
+                  style={{ boxShadow: "4px 4px 0px #000000" }}
                 >
-                  <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-4" style={{ background: "rgba(13,43,28,0.5)" }}>
+                  <div className="w-10 h-10 rounded-sm flex items-center justify-center mb-4 bg-coal-950 border-2 border-pine-500 shadow-[2px_2px_0px_#1F7A4C]">
                     <Icon icon={srv.icon} className="text-pine-400 text-xl" />
                   </div>
-                  <h3 className="font-display font-semibold text-bone mb-1.5">{srv.title}</h3>
-                  <p className="text-sm text-mist leading-relaxed mb-4">{srv.description}</p>
-                  <p className="font-mono text-xs text-mist">{srv.price}</p>
+                  <h3 className="font-bold text-bone mb-1.5 font-display">{srv.title}</h3>
+                  <p className="text-xs text-mist leading-relaxed mb-4">{srv.description}</p>
+                  <p className="font-mono text-xs text-pine-400 font-semibold">{srv.price}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -469,24 +483,24 @@ export default function Home() {
         <RevealSection>
           <motion.div
             variants={staggerItem}
-            className="rounded-2xl p-10 md:p-16 text-center relative overflow-hidden"
-            style={{ background: "#0A0D0B", border: "1px solid #171D18" }}
+            className="rounded-sm p-10 md:p-16 text-center relative overflow-hidden"
+            style={{ background: "#0A0D0B", border: "1px solid #212922" }}
           >
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
               <div className="w-[30rem] h-[30rem] rounded-full bg-pine-900/20 blur-[100px]" />
             </div>
             <div className="relative z-10">
               <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// contact</motion.p>
-              <motion.h2 variants={staggerItem} className="font-display font-semibold text-3xl sm:text-4xl text-bone mb-4">
+              <motion.h2 variants={staggerItem} className="font-bold text-2xl sm:text-3xl text-bone mb-3 font-display tracking-tight">
                 Let's work together
               </motion.h2>
-              <motion.p variants={staggerItem} className="text-mist max-w-md mx-auto mb-8 leading-relaxed">
+              <motion.p variants={staggerItem} className="text-mist max-w-md mx-auto mb-6 leading-relaxed text-xs sm:text-sm">
                 I'm open to freelance projects, full-time opportunities, or collaboration. Tell me about your project and let's discuss.
               </motion.p>
               <motion.div variants={staggerItem} className="flex flex-wrap justify-center gap-3">
                 <a
                   href={profile?.email ? `mailto:${profile.email}` : "mailto:hello@example.com"}
-                  className="inline-flex items-center gap-2 bg-pine-400 text-coal-950 text-sm font-semibold px-6 py-3 rounded-full hover:bg-pine-300 transition"
+                  className="inline-flex items-center gap-2 bg-pine-400 text-coal-950 text-sm font-semibold px-6 py-2.5 rounded hover:bg-pine-300 transition"
                 >
                   <Icon icon="solar:letter-linear" /> Send Email
                 </a>
@@ -495,7 +509,7 @@ export default function Home() {
                     href={profile.linkedin_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-bone text-sm font-medium px-6 py-3 rounded-full transition"
+                    className="inline-flex items-center gap-2 text-bone text-sm font-medium px-6 py-2.5 rounded transition hover:border-pine-500/60"
                     style={{ background: "#050705", border: "1px solid #212922" }}
                   >
                     <Icon icon="mdi:linkedin" /> LinkedIn
@@ -506,7 +520,7 @@ export default function Home() {
                     href={profile.github_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-bone text-sm font-medium px-6 py-3 rounded-full transition"
+                    className="inline-flex items-center gap-2 text-bone text-sm font-medium px-6 py-2.5 rounded transition hover:border-pine-500/60"
                     style={{ background: "#050705", border: "1px solid #212922" }}
                   >
                     <Icon icon="mdi:github" /> GitHub
@@ -533,12 +547,12 @@ function SkillBar({ name, level }: { level: number; name: string }) {
         <span className="text-bone font-medium">{name}</span>
         <span className="text-mist font-mono text-xs">{level}%</span>
       </div>
-      <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "#171D18" }}>
+      <div className="h-1.5 overflow-hidden" style={{ background: "#171D18" }}>
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: inView ? `${level}%` : 0 }}
           transition={{ delay: 0.2, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="h-full rounded-full"
+          className="h-full"
           style={{ background: "linear-gradient(90deg, #1F7A4C, #3FBB7D)" }}
         />
       </div>

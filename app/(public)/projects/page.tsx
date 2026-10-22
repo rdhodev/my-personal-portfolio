@@ -3,21 +3,21 @@
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 
 interface Project {
   id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  gradient: string;
-  status: string;
-  is_featured: boolean;
-  github_url: string | null;
-  demo_url: string | null;
-  image_url: string | null;
   created_at: string;
+  demo_url: string | null;
+  description: string;
+  github_url: string | null;
+  gradient: string;
+  image_url: string | null;
+  is_featured: boolean;
+  status: string;
+  tags: string[];
+  title: string;
 }
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -36,16 +36,16 @@ const fadeUp = {
 
 // ── Skeleton Card ──────────────────────────────────────────────────────────────
 const SkeletonCard = () => (
-  <div className="rounded-2xl overflow-hidden animate-pulse" style={{ background: "#0A0D0B", border: "1px solid #171D18" }}>
+  <div className="rounded-sm overflow-hidden animate-pulse" style={{ background: "#0A0D0B", border: "1px solid #212922" }}>
     <div className="h-48 bg-coal-900" />
     <div className="p-5 space-y-3">
-      <div className="w-2/3 h-4 bg-coal-900 rounded-full" />
-      <div className="w-full h-3 bg-coal-900 rounded-full" />
-      <div className="w-5/6 h-3 bg-coal-900 rounded-full" />
+      <div className="w-2/3 h-4 bg-coal-900 rounded-sm" />
+      <div className="w-full h-3 bg-coal-900 rounded-sm" />
+      <div className="w-5/6 h-3 bg-coal-900 rounded-sm" />
       <div className="flex gap-1.5 pt-1">
-        <div className="w-12 h-4 bg-coal-900 rounded-full" />
-        <div className="w-16 h-4 bg-coal-900 rounded-full" />
-        <div className="w-10 h-4 bg-coal-900 rounded-full" />
+        <div className="w-12 h-4 bg-coal-900 rounded-sm" />
+        <div className="w-16 h-4 bg-coal-900 rounded-sm" />
+        <div className="w-10 h-4 bg-coal-900 rounded-sm" />
       </div>
     </div>
   </div>
@@ -105,10 +105,10 @@ export default function ProjectsPage() {
           <motion.p variants={fadeUp} className="font-mono text-xs font-medium text-pine-400 mb-3">
             // my work
           </motion.p>
-          <motion.h1 variants={fadeUp} className="font-display font-semibold text-3xl sm:text-5xl text-bone tracking-tight mb-4">
+          <motion.h1 variants={fadeUp} className="font-display font-bold text-2xl sm:text-3xl text-bone tracking-tight mb-3">
             Projects &amp; <span className="text-pine-400">Work</span>
           </motion.h1>
-          <motion.p variants={fadeUp} className="text-mist max-w-lg leading-relaxed text-sm sm:text-base mb-8">
+          <motion.p variants={fadeUp} className="text-mist max-w-lg leading-relaxed text-xs sm:text-sm mb-6 font-mono">
             A collection of projects I've built — from personal side projects to products for real clients.
           </motion.p>
 
@@ -134,7 +134,7 @@ export default function ProjectsPage() {
             {[1, 2, 3, 4, 5, 6].map((i) => <SkeletonCard key={i} />)}
           </div>
         ) : projects.length === 0 ? (
-          <div className="text-center py-24 border border-dashed border-coal-700 rounded-2xl">
+          <div className="text-center py-24 border border-dashed border-coal-700 rounded-sm">
             <Icon icon="solar:folder-open-bold-duotone" className="text-mist text-5xl mx-auto mb-4 opacity-40" />
             <p className="text-mist text-sm">No projects have been published yet.</p>
           </div>
@@ -149,13 +149,12 @@ export default function ProjectsPage() {
               <motion.div
                 key={proj.id}
                 variants={fadeUp}
-                whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="group rounded-2xl overflow-hidden flex flex-col"
-                style={{ background: "#0A0D0B", border: "1px solid #171D18" }}
+                whileHover={{ x: -3, y: -3 }}
+                className="group rounded-sm overflow-hidden flex flex-col border-2 border-coal-700 bg-coal-900 transition-all hover:border-pine-400 hover:shadow-[5px_5px_0px_#1F7A4C]"
+                style={{ boxShadow: "4px 4px 0px #000000" }}
               >
                 {/* Cover Image / Gradient */}
-                <div className="relative overflow-hidden h-48 shrink-0">
+                <div className="relative overflow-hidden h-44 shrink-0 border-b-2 border-coal-700">
                   {proj.image_url ? (
                     <img
                       src={proj.image_url}
@@ -176,7 +175,7 @@ export default function ProjectsPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1.5 px-3 py-2 bg-pine-400 text-coal-950 text-xs font-bold rounded-xl hover:bg-pine-300 transition"
+                        className="inline-flex items-center gap-1.5 px-3 py-2 bg-pine-400 text-coal-950 text-xs font-bold rounded-sm hover:bg-pine-300 transition"
                       >
                         <Icon icon="solar:global-linear" /> Live Demo
                       </a>
@@ -187,7 +186,7 @@ export default function ProjectsPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1.5 px-3 py-2 bg-coal-800 border border-coal-700 text-bone text-xs font-bold rounded-xl hover:bg-coal-700 transition"
+                        className="inline-flex items-center gap-1.5 px-3 py-2 bg-coal-800 border border-coal-700 text-bone text-xs font-bold rounded-sm hover:bg-coal-700 transition"
                       >
                         <Icon icon="mdi:github" /> GitHub
                       </a>
@@ -197,7 +196,7 @@ export default function ProjectsPage() {
                   {/* Featured badge */}
                   {proj.is_featured && (
                     <span
-                      className="absolute top-3 left-3 text-yellow-300 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-full flex items-center gap-1"
+                      className="absolute top-3 left-3 text-yellow-300 text-[10px] font-mono font-semibold px-2 py-0.5 rounded-sm flex items-center gap-1"
                       style={{ background: "rgba(5,7,5,0.85)", border: "1px solid rgba(161,130,49,0.4)" }}
                     >
                       <Icon icon="solar:star-bold" className="text-yellow-400" /> FEATURED
@@ -206,11 +205,11 @@ export default function ProjectsPage() {
                 </div>
 
                 {/* Content */}
-                <div className="p-5 flex flex-col flex-1">
-                  <h2 className="font-display font-semibold text-bone mb-1.5 group-hover:text-pine-400 transition leading-snug">
+                <div className="p-4 sm:p-5 flex flex-col flex-1">
+                  <h2 className="font-display font-bold text-bone text-base mb-1 group-hover:text-pine-400 transition leading-snug">
                     {proj.title}
                   </h2>
-                  <p className="text-sm text-mist leading-relaxed mb-4 flex-1 line-clamp-3">
+                  <p className="text-xs text-mist leading-relaxed mb-3 flex-1 line-clamp-3">
                     {proj.description}
                   </p>
 
@@ -219,7 +218,7 @@ export default function ProjectsPage() {
                     {proj.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[10px] font-mono text-pine-300 px-2 py-0.5 rounded-full"
+                        className="text-[10px] font-mono text-pine-300 px-2 py-0.5 rounded-sm border border-pine-900/60"
                         style={{ background: "rgba(13,43,28,0.5)" }}
                       >
                         {tag}
@@ -269,7 +268,7 @@ export default function ProjectsPage() {
             <p className="text-sm text-mist">Interested in working together?</p>
             <Link
               href="/#contact"
-              className="inline-flex items-center gap-2 bg-pine-400 text-coal-950 text-sm font-bold px-6 py-2.5 rounded-full hover:bg-pine-300 transition"
+              className="brutal-btn inline-flex items-center gap-2 bg-pine-400 text-coal-950 text-xs font-bold px-5 py-2 rounded-sm hover:bg-pine-300"
             >
               <Icon icon="solar:chat-round-dots-bold" /> Contact Me
             </Link>

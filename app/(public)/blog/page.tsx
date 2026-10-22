@@ -29,17 +29,17 @@ interface TrendingPost {
 const CATEGORIES = ["All", "Development", "Design", "Productivity", "Trends"];
 
 const ArticleSkeleton = () => (
-  <div className="flex flex-col md:flex-row gap-6 p-5 sm:p-6 rounded-2xl border border-coal-800 bg-coal-950/40 animate-pulse">
-    <div className="md:w-48 h-32 shrink-0 rounded-xl bg-coal-900" />
+  <div className="flex flex-col md:flex-row gap-6 p-5 sm:p-6 rounded-sm border border-coal-800 bg-coal-950/40 animate-pulse">
+    <div className="md:w-48 h-32 shrink-0 rounded-sm bg-coal-900" />
     <div className="flex flex-col justify-between grow space-y-4">
       <div>
-        <div className="w-24 h-3 bg-coal-900 rounded-full mb-3" />
-        <div className="w-full h-5 bg-coal-900 rounded-full mb-2" />
-        <div className="w-2/3 h-5 bg-coal-900 rounded-full mb-4" />
-        <div className="w-full h-3 bg-coal-900 rounded-full mb-1.5" />
-        <div className="w-5/6 h-3 bg-coal-900 rounded-full" />
+        <div className="w-24 h-3 bg-coal-900 rounded-sm mb-3" />
+        <div className="w-full h-5 bg-coal-900 rounded-sm mb-2" />
+        <div className="w-2/3 h-5 bg-coal-900 rounded-sm mb-4" />
+        <div className="w-full h-3 bg-coal-900 rounded-sm mb-1.5" />
+        <div className="w-5/6 h-3 bg-coal-900 rounded-sm" />
       </div>
-      <div className="w-20 h-3 bg-coal-900 rounded-full" />
+      <div className="w-20 h-3 bg-coal-900 rounded-sm" />
     </div>
   </div>
 );
@@ -49,9 +49,9 @@ const TrendingSkeleton = () => (
     {[1, 2, 3].map((i) => (
       <div key={i} className="flex gap-4">
         <div className="space-y-2 grow">
-          <div className="w-full h-4 bg-coal-900 rounded-full" />
-          <div className="w-2/3 h-4 bg-coal-900 rounded-full" />
-          <div className="w-12 h-3 bg-coal-900 rounded-full" />
+          <div className="w-full h-4 bg-coal-900 rounded-sm" />
+          <div className="w-2/3 h-4 bg-coal-900 rounded-sm" />
+          <div className="w-12 h-3 bg-coal-900 rounded-sm" />
         </div>
       </div>
     ))}
@@ -110,10 +110,10 @@ export default function BlogPage() {
           <Link href="/" className="inline-flex items-center gap-1 text-xs text-mist hover:text-pine-400 font-mono transition mb-6">
             <Icon icon="solar:arrow-left-linear" /> Back to Home
           </Link>
-          <h1 className="font-display font-semibold text-3xl sm:text-5xl text-bone tracking-tight mb-4">
+          <h1 className="font-display font-bold text-2xl sm:text-3xl text-bone tracking-tight mb-3">
             Notes &amp; <span className="text-pine-400">Articles</span>
           </h1>
-          <p className="text-mist max-w-lg leading-relaxed text-sm sm:text-base">
+          <p className="text-mist max-w-lg leading-relaxed text-xs sm:text-sm font-mono">
             Sharing thoughts on web development, productivity tips, coding best practices, and UI/UX design exploration.
           </p>
         </div>
@@ -125,8 +125,8 @@ export default function BlogPage() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${selectedCategory === cat
-                    ? "bg-pine-400 text-coal-950"
+                  className={`px-3 py-1.5 rounded-sm text-xs font-mono font-medium transition-all ${selectedCategory === cat
+                    ? "bg-pine-400 text-coal-950 font-bold"
                     : "bg-coal-900 border border-coal-700 text-mist hover:text-bone hover:border-coal-600"
                     }`}
                 >
@@ -143,7 +143,7 @@ export default function BlogPage() {
                   <ArticleSkeleton />
                 </>
               ) : filteredPosts.length === 0 ? (
-                <div className="text-center py-16 border border-dashed border-coal-700 rounded-2xl">
+                <div className="text-center py-16 border border-dashed border-coal-700 rounded-sm">
                   <Icon icon="solar:sad-ellipse-bold-duotone" className="text-mist text-4xl mx-auto mb-3" />
                   <p className="text-mist text-sm">No articles found in this category.</p>
                 </div>
@@ -154,35 +154,32 @@ export default function BlogPage() {
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.08, duration: 0.4 }}
-                    className="group flex flex-col md:flex-row gap-6 p-5 sm:p-6 rounded-2xl transition hover:border-pine-500/30"
-                    style={{
-                      background: "#0A0D0B",
-                      border: "1px solid #171D18",
-                    }}
+                    className="group flex flex-col md:flex-row gap-5 p-4 sm:p-5 rounded-sm border-2 border-coal-700 bg-coal-900 transition-all hover:border-pine-400 hover:shadow-[5px_5px_0px_#1F7A4C]"
+                    style={{ boxShadow: "4px 4px 0px #000000" }}
                   >
-                    <div className={`md:w-48 h-32 shrink-0 rounded-xl bg-gradient-to-br ${post.gradient} flex items-center justify-center relative overflow-hidden`}>
-                      <Icon icon="solar:document-text-bold-duotone" className="text-white/30 text-4xl" />
+                    <div className={`md:w-44 h-28 shrink-0 rounded-sm bg-gradient-to-br ${post.gradient} flex items-center justify-center relative overflow-hidden border border-coal-700`}>
+                      <Icon icon="solar:document-text-bold-duotone" className="text-white/30 text-3xl" />
                     </div>
 
                     <div className="flex flex-col justify-between grow">
                       <div>
-                        <div className="flex items-center gap-3 text-[11px] font-mono text-pine-400 mb-2">
+                        <div className="flex items-center gap-2.5 text-[10px] font-mono text-pine-400 mb-1.5">
                           <span>{post.date}</span>
                           <span>•</span>
-                          <span className="bg-pine-950/60 border border-pine-800/40 px-2 py-0.5 rounded-full text-[10px]">
+                          <span className="bg-coal-950 border border-pine-800/80 px-2 py-0.5 rounded-sm text-[10px] text-pine-300">
                             {post.category}
                           </span>
                         </div>
-                        <h2 className="font-display font-semibold text-lg sm:text-xl text-bone mb-2 group-hover:text-pine-400 transition leading-snug">
+                        <h2 className="font-display font-bold text-base text-bone mb-1.5 group-hover:text-pine-400 transition leading-snug">
                           <Link href={`/blog/${post.slug}`}>
                             {post.title}
                           </Link>
                         </h2>
-                        <p className="text-sm text-mist leading-relaxed line-clamp-2 mb-4">
+                        <p className="text-xs text-mist leading-relaxed line-clamp-2 mb-3">
                           {post.excerpt}
                         </p>
                       </div>
-                      <div className="flex items-center gap-4 text-xs text-mist/70">
+                      <div className="flex items-center gap-4 text-[11px] text-mist/70 font-mono">
                         <span className="flex items-center gap-1">
                           <Icon icon="solar:clock-circle-linear" /> {post.readTime}
                         </span>
@@ -197,34 +194,31 @@ export default function BlogPage() {
             </div>
           </div>
 
-          <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-24">
+          <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
             <div
-              className="p-6 rounded-2xl"
-              style={{
-                background: "#0A0D0B",
-                border: "1px solid #171D18",
-              }}
+              className="p-5 rounded-sm border-2 border-coal-700 bg-coal-900"
+              style={{ boxShadow: "4px 4px 0px #000000" }}
             >
-              <div className="flex items-center gap-2 mb-6 border-b border-coal-800 pb-3">
-                <Icon icon="solar:fire-bold-duotone" className="text-pine-400 text-xl" />
-                <h3 className="font-display font-semibold text-sm text-bone">
+              <div className="flex items-center gap-2 mb-4 border-b border-coal-800 pb-2.5">
+                <Icon icon="solar:fire-bold-duotone" className="text-pine-400 text-lg" />
+                <h3 className="font-display font-bold text-xs uppercase tracking-wider text-bone">
                   Trending Articles
                 </h3>
               </div>
 
-              <div className="space-y-5">
+              <div className="space-y-4">
                 {isLoading ? (
                   <TrendingSkeleton />
                 ) : (
                   trendingPosts.map((tPost) => (
-                    <div key={tPost.id} className="flex gap-4 group">
+                    <div key={tPost.id} className="flex gap-3 group">
                       <div className="space-y-1">
-                        <h4 className="font-display font-medium text-xs sm:text-sm text-bone group-hover:text-pine-400 transition leading-snug mt-1">
+                        <h4 className="font-display font-medium text-xs text-bone group-hover:text-pine-400 transition leading-snug">
                           <Link href={`/blog/${tPost.slug}`}>
                             {tPost.title}
                           </Link>
                         </h4>
-                        <div className="flex items-center gap-1 text-[10px] text-mist/50">
+                        <div className="flex items-center gap-1 text-[10px] text-mist/50 font-mono">
                           <Icon icon="solar:eye-linear" />
                           <span>{tPost.views} views</span>
                         </div>
@@ -236,26 +230,23 @@ export default function BlogPage() {
             </div>
 
             <div
-              className="p-6 rounded-2xl relative overflow-hidden"
-              style={{
-                background: "#0A0D0B",
-                border: "1px solid #171D18",
-              }}
+              className="p-5 rounded-sm border-2 border-coal-700 bg-coal-900 relative overflow-hidden"
+              style={{ boxShadow: "4px 4px 0px #000000" }}
             >
               <div className="relative z-10 text-center">
-                <h3 className="font-display font-semibold text-sm text-bone mb-2">
+                <h3 className="font-display font-bold text-xs uppercase tracking-wider text-bone mb-2">
                   Subscribe to Newsletter
                 </h3>
-                <p className="text-[11px] text-mist mb-5 leading-relaxed">
-                  Get the latest articles on Web Development sent directly to your inbox every month.
+                <p className="text-[11px] text-mist mb-4 leading-relaxed font-mono">
+                  Get the latest articles sent directly to your inbox every month.
                 </p>
                 <div className="flex flex-col gap-2">
                   <input
                     type="email"
                     placeholder="Your email address"
-                    className="bg-coal-950 border border-coal-700 text-bone text-xs px-4 py-2.5 rounded-full w-full focus:outline-none focus:border-pine-500 transition"
+                    className="bg-coal-950 border border-coal-700 text-bone text-xs px-3.5 py-2 rounded-sm w-full focus:outline-none focus:border-pine-500 transition font-mono"
                   />
-                  <button className="bg-pine-400 text-coal-950 font-semibold text-xs px-5 py-2.5 rounded-full hover:bg-pine-300 transition w-full">
+                  <button className="brutal-btn bg-pine-400 text-coal-950 font-bold text-xs px-4 py-2 rounded-sm hover:bg-pine-300 w-full">
                     Subscribe
                   </button>
                 </div>
