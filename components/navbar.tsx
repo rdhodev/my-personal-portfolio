@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
@@ -70,10 +71,15 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-5 md:px-8">
         <div className="flex items-center justify-between h-14 relative">
           <div className="flex items-center gap-2">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="font-semibold text-base text-bone tracking-tight font-display">
-                Ridho<span className="text-pine-400"></span>
-              </span>
+            <Link href="/" className="flex items-center group">
+              <Image
+                src="/ridho-logo.png"
+                alt="Ridho Logo"
+                width={120}
+                height={36}
+                priority
+                className="h-8 w-auto object-contain transition-opacity group-hover:opacity-85"
+              />
             </Link>
           </div>
 
@@ -85,7 +91,7 @@ export default function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`text-xs font-mono font-medium transition-colors ${
+                  className={`text-xs font-sans font-medium transition-colors ${
                     active
                       ? "text-pine-400 font-semibold"
                       : "text-mist hover:text-bone"
