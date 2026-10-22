@@ -123,7 +123,7 @@ export default function Home() {
         <div className="pointer-events-none absolute -top-40 -right-32 w-[24rem] sm:w-[28rem] h-[24rem] sm:h-[28rem] rounded-full bg-pine-700/20 blur-[80px] sm:blur-[100px]" />
         <div className="pointer-events-none absolute bottom-0 left-1/4 w-[16rem] sm:w-[20rem] h-[16rem] sm:h-[20rem] rounded-full bg-pine-900/20 blur-[70px] sm:blur-[90px]" />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pt-10 sm:pt-14 pb-14 sm:pb-24 w-full flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 sm:gap-12 items-center relative z-10">
+        <div className="max-w-5xl mx-auto px-4 pt-10 sm:pt-14 pb-14 sm:pb-24 w-full flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 sm:gap-12 items-center relative z-10">
           {/* Text */}
           <motion.div
             ref={heroRef}
@@ -178,20 +178,38 @@ export default function Home() {
               </a>
             </motion.div>
 
-            <motion.div variants={fadeUp} custom={0.32} className="flex items-center justify-center lg:justify-start gap-4 sm:gap-6 text-[11px] sm:text-xs text-mist font-mono">
+            <motion.div variants={fadeUp} custom={0.32} className="flex items-center justify-center lg:justify-start gap-3 text-xs font-mono">
               {[
-                { label: "years exp", value: "4+" },
-                { label: "projects", value: `${projects.length || "30"}+` },
-                { label: "happy clients", value: "18" },
-              ].map((stat, i) => (
-                <div key={i} className="flex items-center gap-4 sm:gap-6">
-                  {i > 0 && <div className="w-0.5 h-6 sm:h-7 bg-coal-700" />}
-                  <div>
-                    <span className="text-pine-400 font-bold text-sm sm:text-base block">{stat.value}</span>
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
+                {
+                  href: profile?.github_url || "https://github.com",
+                  icon: "mdi:github",
+                  label: "GitHub",
+                },
+                {
+                  href: profile?.linkedin_url || "https://linkedin.com",
+                  icon: "mdi:linkedin",
+                  label: "LinkedIn",
+                },
+                {
+                  href: profile?.instagram_url || "https://instagram.com",
+                  icon: "mdi:instagram",
+                  label: "Instagram",
+                },
+              ]
+                .filter((social) => Boolean(social.href))
+                .map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-1.5 px-3 py-1.5 bg-coal-900 border border-coal-700 rounded-sm text-mist hover:text-pine-300 hover:border-pine-500/60 hover:bg-coal-800 transition-all text-xs"
+                    title={social.label}
+                  >
+                    <Icon icon={social.icon} className="text-base text-pine-400 group-hover:scale-110 transition-transform" />
+                    <span className="hidden sm:inline font-sans">{social.label}</span>
+                  </a>
+                ))}
             </motion.div>
           </motion.div>
 
@@ -227,7 +245,7 @@ export default function Home() {
       </section>
 
       {/* ── ABOUT ────────────────────────────────────────────────────────── */}
-      <section id="about" className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-14 sm:py-20 md:py-28">
+      <section id="about" className="max-w-5xl mx-auto px-4  py-14 sm:py-20 md:py-28">
         <RevealSection>
           <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">
             // about
@@ -241,15 +259,21 @@ export default function Home() {
                 {displayAbout}
               </motion.p>
               <motion.div variants={staggerItem} className="flex flex-wrap gap-2">
-                {(displayRole.split("&").map(s => s.trim())).concat(["Performance"]).map((tag) => (
-                  <span
-                    key={tag}
-                    className="font-mono text-xs text-mist px-3 py-1.5 rounded-sm"
-                    style={{ background: "#0A0D0B", border: "1px solid #212922" }}
-                  >
-                    {tag}
-                  </span>
-                ))}
+                {[
+                  ...displayRole.split("&").map(s => s.trim()),
+                  ...skills.slice(0, 5).map(s => s.name),
+                ]
+                  .filter((tag, idx, arr) => tag && arr.indexOf(tag) === idx)
+                  .slice(0, 8)
+                  .map((tag) => (
+                    <span
+                      key={tag}
+                      className="font-mono text-xs text-mist px-3 py-1.5 rounded-sm"
+                      style={{ background: "#0A0D0B", border: "1px solid #212922" }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
               </motion.div>
             </div>
 
@@ -281,7 +305,7 @@ export default function Home() {
       </section>
 
       {/* ── SKILLS ───────────────────────────────────────────────────────── */}
-      <section id="skills" className="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
+      <section id="skills" className="max-w-5xl mx-auto px-4 py-20 md:py-28">
         <RevealSection>
           <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// skills</motion.p>
           <motion.h2 variants={staggerItem} className="font-display font-bold text-xl sm:text-2xl text-bone mb-8 tracking-tight">
@@ -308,26 +332,30 @@ export default function Home() {
 
       {/* ── EXPERIENCE ───────────────────────────────────────────────────── */}
       {experiences.length > 0 && (
-        <section id="experience" className="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
+        <section id="experience" className="max-w-5xl mx-auto px-4 py-12 md:py-16">
           <RevealSection>
             <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// experience</motion.p>
             <motion.h2 variants={staggerItem} className="font-display font-bold text-xl sm:text-2xl text-bone mb-8 tracking-tight">
               Work experience
             </motion.h2>
             <div className="relative pl-8 max-w-3xl">
-              <div className="absolute left-[7px] top-1 bottom-1 w-px" style={{ background: "#212922" }} />
+              {/* Timeline vertical line: centered exactly at left-3 (12px), dot center at 12px */}
+              <div className="absolute left-[11px] top-2 bottom-2 w-0.5 bg-coal-700" />
               {experiences.map((exp) => (
                 <motion.div key={exp.id} variants={staggerItem} className="relative mb-10 last:mb-0">
+                  {/* Timeline dot: 10x10px, centered on the line (left: 7px = 12px - 5px) */}
                   <div
-                    className="absolute -left-8 top-1 w-3 h-3 rounded-sm"
+                    className="absolute left-[-25px] top-2.5 w-2.5 h-2.5 rounded-full"
                     style={{
-                      background: exp.is_current ? "#3FBB7D" : "#212922",
-                      boxShadow: exp.is_current ? "0 0 0 3px rgba(13,43,28,0.5)" : "0 0 0 3px #050705",
+                      background: exp.is_current ? "#3FBB7D" : "#333F35",
+                      boxShadow: exp.is_current
+                        ? "0 0 0 4px #050705, 0 0 0 5px #1F7A4C"
+                        : "0 0 0 4px #050705, 0 0 0 5px #212922",
                     }}
                   />
                   <span className="font-mono text-xs text-mist">{exp.period}</span>
                   <h3 className="font-display font-semibold text-lg text-bone mt-1">{exp.role}</h3>
-                  <p className="text-sm text-mist mb-2">{exp.company}</p>
+                  <p className="text-sm text-pine-400/90 font-medium mb-2">{exp.company}</p>
                   <p className="text-sm text-mist leading-relaxed">{exp.description}</p>
                 </motion.div>
               ))}
@@ -338,7 +366,7 @@ export default function Home() {
 
       {/* ── WORK / PROJECTS ──────────────────────────────────────────────── */}
       {projects.length > 0 && (
-        <section id="work" className="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
+        <section id="work" className="max-w-5xl mx-auto px-4  py-20 md:py-28">
           <RevealSection>
             <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// recent work</motion.p>
             <motion.h2 variants={staggerItem} className="font-display font-bold text-xl sm:text-2xl text-bone mb-8 tracking-tight">
@@ -408,7 +436,7 @@ export default function Home() {
 
       {/* ── CERTIFICATES ─────────────────────────────────────────────────── */}
       {certificates.length > 0 && (
-        <section id="certificates" className="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
+        <section id="certificates" className="max-w-5xl mx-auto px-4 py-20 md:py-28">
           <RevealSection>
             <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// certificates</motion.p>
             <motion.h2 variants={staggerItem} className="font-display font-bold text-xl sm:text-2xl text-bone mb-8 tracking-tight">
@@ -439,7 +467,7 @@ export default function Home() {
 
       {/* ── SERVICES ─────────────────────────────────────────────────────── */}
       {services.length > 0 && (
-        <section id="services" className="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
+        <section id="services" className="max-w-6xl mx-auto px-4 py-20 md:py-28">
           <RevealSection>
             <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// services</motion.p>
             <motion.h2 variants={staggerItem} className="font-display font-bold text-xl sm:text-2xl text-bone mb-8 tracking-tight">
@@ -468,7 +496,7 @@ export default function Home() {
       )}
 
       {/* ── CONTACT ──────────────────────────────────────────────────────── */}
-      <section id="contact" className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-14 sm:py-20 md:py-28">
+      <section id="contact" className="max-w-5xl mx-auto px-4 py-14 sm:py-20 md:py-28">
         <RevealSection>
           <motion.div
             variants={staggerItem}

@@ -68,7 +68,7 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-coal-950/85 backdrop-blur-md border-b border-coal-700 font-sans">
-      <div className="max-w-6xl mx-auto px-5 md:px-8">
+      <div className="max-w-5xl mx-auto px-4">
         <div className="flex items-center justify-between h-14 relative">
           <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center group">
