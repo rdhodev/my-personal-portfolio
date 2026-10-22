@@ -118,18 +118,19 @@ export default function Home() {
     <div className="font-sans text-bone bg-coal-950 overflow-x-hidden">
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden min-h-screen flex items-center">
+      <section className="relative overflow-hidden min-h-[90vh] sm:min-h-screen flex items-center">
         {/* Glow orbs */}
-        <div className="pointer-events-none absolute -top-40 -right-32 w-[28rem] h-[28rem] rounded-full bg-pine-700/20 blur-[100px]" />
-        <div className="pointer-events-none absolute bottom-0 left-1/4 w-[20rem] h-[20rem] rounded-full bg-pine-900/20 blur-[90px]" />
+        <div className="pointer-events-none absolute -top-40 -right-32 w-[24rem] sm:w-[28rem] h-[24rem] sm:h-[28rem] rounded-full bg-pine-700/20 blur-[80px] sm:blur-[100px]" />
+        <div className="pointer-events-none absolute bottom-0 left-1/4 w-[16rem] sm:w-[20rem] h-[16rem] sm:h-[20rem] rounded-full bg-pine-900/20 blur-[70px] sm:blur-[90px]" />
 
-        <div className="max-w-6xl mx-auto px-5 md:px-8 pt-14 pb-24 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pt-10 sm:pt-14 pb-14 sm:pb-24 w-full flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 sm:gap-12 items-center relative z-10">
           {/* Text */}
           <motion.div
             ref={heroRef}
             initial="hidden"
             animate="visible"
             variants={stagger}
+            className="w-full text-center lg:text-left"
           >
             {/* Brutalist Hello Tag with corner handles */}
             <motion.div variants={fadeUp} className="inline-block mb-4">
@@ -146,7 +147,7 @@ export default function Home() {
             <motion.h1
               variants={fadeUp}
               custom={0.08}
-              className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-bone mb-4 tracking-tight leading-snug"
+              className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-bone mb-3.5 tracking-tight leading-snug"
             >
               Building products<br className="hidden sm:block" />
               {" "}that feel{" "}
@@ -156,15 +157,15 @@ export default function Home() {
             <motion.p
               variants={fadeUp}
               custom={0.16}
-              className="text-mist text-xs sm:text-sm max-w-md mb-7 leading-relaxed font-mono"
+              className="text-mist text-xs sm:text-sm max-w-md mx-auto lg:mx-0 mb-6 sm:mb-7 leading-relaxed font-mono"
             >
               I'm {displayName.split(" ")[0]}, {displayRole.toLowerCase()} at Pekanbaru. {displayHeroHeadline}
             </motion.p>
 
-            <motion.div variants={fadeUp} custom={0.24} className="flex flex-wrap items-center gap-4 mb-10">
+            <motion.div variants={fadeUp} custom={0.24} className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-8 sm:mb-10">
               <a
                 href="#work"
-                className="brutal-btn inline-flex items-center gap-2 bg-pine-400 text-coal-950 text-sm font-bold px-6 py-2.5 rounded-sm hover:bg-pine-300"
+                className="brutal-btn inline-flex items-center justify-center gap-2 bg-pine-400 text-coal-950 text-xs sm:text-sm font-bold px-5 py-2.5 rounded-sm hover:bg-pine-300"
               >
                 View my work <Icon icon="solar:arrow-right-linear" />
               </a>
@@ -173,30 +174,30 @@ export default function Home() {
                   href={profile.resume_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="brutal-btn inline-flex items-center gap-2 bg-coal-900 text-bone text-sm font-bold px-6 py-2.5 rounded-sm hover:bg-coal-800 border-2 border-coal-600"
+                  className="brutal-btn inline-flex items-center justify-center gap-2 bg-coal-900 text-bone text-xs sm:text-sm font-bold px-5 py-2.5 rounded-sm hover:bg-coal-800 border-2 border-coal-600"
                 >
                   <Icon icon="solar:download-minimalistic-linear" /> Download CV
                 </a>
               ) : (
                 <a
                   href="#contact"
-                  className="brutal-btn inline-flex items-center gap-2 bg-coal-900 text-bone text-sm font-bold px-6 py-2.5 rounded-sm hover:bg-coal-800 border-2 border-coal-600"
+                  className="brutal-btn inline-flex items-center justify-center gap-2 bg-coal-900 text-bone text-xs sm:text-sm font-bold px-5 py-2.5 rounded-sm hover:bg-coal-800 border-2 border-coal-600"
                 >
                   <Icon icon="solar:letter-linear" /> Contact Me
                 </a>
               )}
             </motion.div>
 
-            <motion.div variants={fadeUp} custom={0.32} className="flex items-center gap-6 text-xs text-mist font-mono">
+            <motion.div variants={fadeUp} custom={0.32} className="flex items-center justify-center lg:justify-start gap-4 sm:gap-6 text-[11px] sm:text-xs text-mist font-mono">
               {[
                 { label: "years exp", value: "4+" },
                 { label: "projects", value: `${projects.length || "30"}+` },
                 { label: "happy clients", value: "18" },
               ].map((stat, i) => (
-                <div key={i} className="flex items-center gap-6">
-                  {i > 0 && <div className="w-0.5 h-7 bg-coal-700" />}
+                <div key={i} className="flex items-center gap-4 sm:gap-6">
+                  {i > 0 && <div className="w-0.5 h-6 sm:h-7 bg-coal-700" />}
                   <div>
-                    <span className="text-pine-400 font-bold text-base block">{stat.value}</span>
+                    <span className="text-pine-400 font-bold text-sm sm:text-base block">{stat.value}</span>
                     {stat.label}
                   </div>
                 </div>
@@ -209,15 +210,13 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={fadeLeft}
-            className="relative mx-auto w-full max-w-[260px] sm:max-w-[290px] lg:max-w-[310px] aspect-[4/5] flex items-center justify-center select-none"
+            className="relative mx-auto w-[220px] sm:w-[260px] lg:w-[310px] aspect-[4/5] flex items-center justify-center select-none"
           >
             {/* Brutalist offset background boxes */}
-            <div className="absolute inset-0 bg-pine-500 translate-x-2.5 translate-y-2.5 rounded-sm border-2 border-coal-950" />
-            <div className="absolute inset-0 bg-coal-900 rounded-sm border-2 border-pine-400/80 shadow-[5px_5px_0px_#000000] overflow-hidden">
+            <div className="absolute inset-0 bg-pine-500 translate-x-2 sm:translate-x-2.5 translate-y-2 sm:translate-y-2.5 rounded-sm border-2 border-coal-950" />
+            <div className="absolute inset-0 bg-coal-900 rounded-sm border-2 border-pine-400/80 shadow-[4px_4px_0px_#000000] sm:shadow-[5px_5px_0px_#000000] overflow-hidden">
               {/* Corner accent marks */}
-              <div className="absolute top-2 left-2 z-30 font-mono text-[10px] text-pine-400 font-bold px-1.5 py-0.5 bg-coal-950/80 border border-pine-500/40">
-                [DEV::PROFILE]
-              </div>
+
 
               {profile?.avatar_url ? (
                 <img
@@ -229,7 +228,7 @@ export default function Home() {
                 <div
                   className="w-full h-full flex items-center justify-center bg-coal-900"
                 >
-                  <Icon icon="solar:user-id-bold" className="text-pine-400/30 text-8xl" />
+                  <Icon icon="solar:user-id-bold" className="text-pine-400/30 text-7xl sm:text-8xl" />
                 </div>
               )}
             </div>
@@ -238,7 +237,7 @@ export default function Home() {
       </section>
 
       {/* ── ABOUT ────────────────────────────────────────────────────────── */}
-      <section id="about" className="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
+      <section id="about" className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-14 sm:py-20 md:py-28">
         <RevealSection>
           <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">
             // about
@@ -363,7 +362,7 @@ export default function Home() {
                   target={proj.demo_url || proj.github_url ? "_blank" : undefined}
                   rel="noopener noreferrer"
                   variants={staggerItem}
-                  whileHover={{ y: -3, x: -3 }}
+                  whileHover={{ x: -3, y: -3 }}
                   className="group rounded-sm overflow-hidden block border-2 border-coal-700 bg-coal-900 transition-all hover:border-pine-400 hover:shadow-[5px_5px_0px_#1F7A4C]"
                   style={{ boxShadow: "4px 4px 0px #000000" }}
                 >
@@ -461,7 +460,7 @@ export default function Home() {
                 <motion.div
                   key={srv.id}
                   variants={staggerItem}
-                  whileHover={{ y: -3, x: -3 }}
+                  whileHover={{ x: -3, y: -3 }}
                   className="rounded-sm p-6 bg-coal-900 border-2 border-coal-700 transition-all hover:border-pine-400 hover:shadow-[5px_5px_0px_#1F7A4C]"
                   style={{ boxShadow: "4px 4px 0px #000000" }}
                 >
@@ -479,28 +478,28 @@ export default function Home() {
       )}
 
       {/* ── CONTACT ──────────────────────────────────────────────────────── */}
-      <section id="contact" className="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
+      <section id="contact" className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-14 sm:py-20 md:py-28">
         <RevealSection>
           <motion.div
             variants={staggerItem}
-            className="rounded-sm p-10 md:p-16 text-center relative overflow-hidden"
+            className="rounded-sm p-6 sm:p-10 md:p-16 text-center relative overflow-hidden"
             style={{ background: "#0A0D0B", border: "1px solid #212922" }}
           >
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <div className="w-[30rem] h-[30rem] rounded-full bg-pine-900/20 blur-[100px]" />
+              <div className="w-[20rem] sm:w-[30rem] h-[20rem] sm:h-[30rem] rounded-full bg-pine-900/20 blur-[80px] sm:blur-[100px]" />
             </div>
             <div className="relative z-10">
-              <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-3">// contact</motion.p>
-              <motion.h2 variants={staggerItem} className="font-bold text-2xl sm:text-3xl text-bone mb-3 font-display tracking-tight">
+              <motion.p variants={staggerItem} className="font-mono text-xs font-medium text-pine-400 mb-2 sm:mb-3">// contact</motion.p>
+              <motion.h2 variants={staggerItem} className="font-bold text-xl sm:text-2xl md:text-3xl text-bone mb-3 font-display tracking-tight">
                 Let's work together
               </motion.h2>
               <motion.p variants={staggerItem} className="text-mist max-w-md mx-auto mb-6 leading-relaxed text-xs sm:text-sm">
                 I'm open to freelance projects, full-time opportunities, or collaboration. Tell me about your project and let's discuss.
               </motion.p>
-              <motion.div variants={staggerItem} className="flex flex-wrap justify-center gap-3">
+              <motion.div variants={staggerItem} className="flex flex-col sm:flex-row justify-center gap-3 w-full sm:w-auto">
                 <a
                   href={profile?.email ? `mailto:${profile.email}` : "mailto:hello@example.com"}
-                  className="inline-flex items-center gap-2 bg-pine-400 text-coal-950 text-sm font-semibold px-6 py-2.5 rounded hover:bg-pine-300 transition"
+                  className="brutal-btn inline-flex items-center justify-center gap-2 bg-pine-400 text-coal-950 text-xs sm:text-sm font-bold px-6 py-2.5 rounded-sm hover:bg-pine-300"
                 >
                   <Icon icon="solar:letter-linear" /> Send Email
                 </a>
@@ -509,8 +508,7 @@ export default function Home() {
                     href={profile.linkedin_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-bone text-sm font-medium px-6 py-2.5 rounded transition hover:border-pine-500/60"
-                    style={{ background: "#050705", border: "1px solid #212922" }}
+                    className="brutal-btn inline-flex items-center justify-center gap-2 text-bone text-xs sm:text-sm font-bold px-6 py-2.5 rounded-sm hover:border-pine-500/60 bg-coal-900 border-2 border-coal-700"
                   >
                     <Icon icon="mdi:linkedin" /> LinkedIn
                   </a>
@@ -520,8 +518,7 @@ export default function Home() {
                     href={profile.github_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-bone text-sm font-medium px-6 py-2.5 rounded transition hover:border-pine-500/60"
-                    style={{ background: "#050705", border: "1px solid #212922" }}
+                    className="brutal-btn inline-flex items-center justify-center gap-2 text-bone text-xs sm:text-sm font-bold px-6 py-2.5 rounded-sm hover:border-pine-500/60 bg-coal-900 border-2 border-coal-700"
                   >
                     <Icon icon="mdi:github" /> GitHub
                   </a>
