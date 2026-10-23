@@ -41,12 +41,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .order("date", { ascending: false });
 
     if (!error && posts) {
-      blogRoutes = posts.map((post) => ({
-        url: `${BASE_URL}/blog/${post.slug}`,
-        lastModified: post.date ? new Date(post.date) : new Date(),
-        changeFrequency: "monthly" as const,
-        priority: 0.6,
-      }));
+      blogRoutes = posts.map((post) => {
+        const parsedDate = post.date ? new Date(post.date) : null;
+        const isValidDate = parsedDate && !isNaN(parsedDate.getTime());
+        return {
+          url: `${BASE_URL}/blog/${post.slug}`,
+          lastModified: isValidDate ? parsedDate : new Date(),
+          changeFrequency: "monthly" as const,
+          priority: 0.6,
+        };
+      });
     }
   } catch (err) {
     console.error("Sitemap: Failed to fetch blog posts from Supabase:", err);
