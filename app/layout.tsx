@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -15,15 +15,22 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://haloridho.my.id"),
-  title: {
-    default: "Ridho Hidayat — Fullstack Developer",
-    template: "%s | Ridho Hidayat",
-  },
-  description: "Portfolio Ridho Hidayat, fullstack developer yang membangun website & aplikasi web fungsional, scalable, cepat, dan modern end-to-end.",
-  keywords: ["Fullstack Developer", "Software Engineer", "Web Developer", "React", "Next.js", "Node.js", "Ridho Hidayat", "Portfolio"],
   authors: [{ name: "Ridho Hidayat", url: "https://haloridho.my.id" }],
   creator: "Ridho Hidayat",
+  description: "Portfolio Ridho Hidayat, fullstack developer yang membangun website & aplikasi web fungsional, scalable, cepat, dan modern end-to-end.",
+  icons: {
+    icon: [
+      { url: "/favicon/favicon.ico" },
+      { type: "image/png", sizes: "16x16", url: "/favicon/favicon-16x16.png" },
+      { type: "image/png", sizes: "32x32", url: "/favicon/favicon-32x32.png" },
+    ],
+    apple: [
+      { type: "image/png", sizes: "180x180", url: "/favicon/apple-touch-icon.png" },
+    ],
+  },
+  keywords: ["Fullstack Developer", "Software Engineer", "Web Developer", "React", "Next.js", "Node.js", "Ridho Hidayat", "Portfolio"],
+  manifest: "/favicon/site.webmanifest",
+  metadataBase: new URL("https://haloridho.my.id"),
   openGraph: {
     type: "website",
     locale: "id_ID",
@@ -33,31 +40,24 @@ export const metadata: Metadata = {
     siteName: "Ridho Hidayat Portfolio",
     images: [
       {
-        url: "/ridho-logo2.png",
-        width: 1280,
-        height: 720,
         alt: "Ridho Hidayat Logo",
+        height: 720,
+        url: "/og-image.png",
+        width: 1280,
       },
     ],
+  },
+  title: {
+    default: "Ridho Hidayat — Fullstack Developer",
+    template: "%s | Ridho Hidayat",
   },
   twitter: {
     card: "summary_large_image",
     title: "Ridho Hidayat — Fullstack Developer",
     description: "Portfolio Ridho Hidayat, fullstack developer yang membangun website & aplikasi web fungsional, scalable, cepat, dan modern end-to-end.",
-    images: ["/ridho-logo2.png"],
+    images: ["/og-image.png"],
     creator: "@rdhohdyat",
   },
-  icons: {
-    icon: [
-      { url: "/favicon/favicon.ico" },
-      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: [
-      { url: "/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-  },
-  manifest: "/favicon/site.webmanifest",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
