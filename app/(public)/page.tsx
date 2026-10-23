@@ -577,7 +577,7 @@ export default function Home() {
                   href={profile?.email ? `mailto:${profile.email}` : "mailto:hello@example.com"}
                   className="brutal-btn inline-flex items-center justify-center gap-2 bg-pine-400 text-coal-950 text-xs sm:text-sm font-bold px-6 py-2.5 rounded-sm hover:bg-pine-300"
                 >
-                  <Icon icon="solar:letter-linear" /> Send Email
+                  <Icon icon="solar:letter-bold" /> Send Email
                 </a>
                 {profile?.linkedin_url && (
                   <a

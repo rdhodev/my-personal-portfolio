@@ -12,7 +12,6 @@ export default function Navbar() {
   const [activeHash, setActiveHash] = useState("");
 
   useEffect(() => {
-    // Sync hash on mount and hashchange
     const updateHash = () => {
       setActiveHash(window.location.hash);
     };
@@ -91,11 +90,10 @@ export default function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`text-xs font-sans font-medium transition-colors ${
-                    active
-                      ? "text-pine-400 font-semibold"
-                      : "text-mist hover:text-bone"
-                  }`}
+                  className={`text-xs font-sans font-medium transition-colors ${active
+                    ? "text-pine-400 font-semibold"
+                    : "text-mist hover:text-bone"
+                    }`}
                 >
                   {item.label}
                 </Link>
@@ -109,7 +107,7 @@ export default function Navbar() {
               href="#contact"
               className="inline-flex items-center gap-1.5 bg-pine-400 text-coal-950 text-xs font-bold px-4 py-2 rounded-sm hover:bg-pine-300 transition"
             >
-              <Icon icon="solar:letter-linear" />
+              <Icon icon="solar:letter-bold" />
               Let's Talk
             </Link>
           </div>
@@ -141,11 +139,10 @@ export default function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className={`flex items-center gap-3 py-2.5 px-3 rounded-sm text-xs font-mono transition-colors ${
-                    active
-                      ? "text-pine-400 font-bold"
-                      : "text-mist hover:text-bone hover:bg-coal-900/40"
-                  }`}
+                  className={`flex items-center gap-3 py-2.5 px-3 rounded-sm text-xs font-mono transition-colors ${active
+                    ? "text-pine-400 font-bold"
+                    : "text-mist hover:text-bone hover:bg-coal-900/40"
+                    }`}
                 >
                   <Icon
                     icon={item.icon}
