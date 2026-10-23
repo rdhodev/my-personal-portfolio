@@ -70,7 +70,7 @@ export default function Navbar() {
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex items-center justify-between h-14 relative">
           <div className="flex items-center gap-2">
-            <Link href="/" className="flex items-center group">
+            <Link href="/" aria-label="Home" className="flex items-center group">
               <Image
                 src="/ridho-logo.png"
                 alt="Ridho Logo"

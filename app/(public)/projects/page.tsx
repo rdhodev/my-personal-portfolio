@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -155,10 +156,12 @@ export default function ProjectsPage() {
                 {/* Image: bordered, no card border */}
                 <div className="relative overflow-hidden aspect-[4/3] w-full border border-coal-700 mb-4 shrink-0">
                   {proj.image_url ? (
-                    <img
+                    <Image
                       src={proj.image_url}
                       alt={proj.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
                     <div className={`w-full h-full bg-gradient-to-br ${proj.gradient} flex items-center justify-center`}>
@@ -201,6 +204,7 @@ export default function ProjectsPage() {
                       href={proj.demo_url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`View live demo of ${proj.title}`}
                       className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-pine-400 bg-pine-900/30 hover:bg-pine-900/60 border border-pine-800/60 hover:border-pine-600 px-2.5 py-1 transition rounded-sm"
                     >
                       <Icon icon="solar:global-linear" /> Live Demo
@@ -213,6 +217,7 @@ export default function ProjectsPage() {
                       href={proj.github_url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`View source code of ${proj.title} on GitHub`}
                       className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-mist hover:text-bone bg-coal-800/50 hover:bg-coal-700/60 border border-coal-700 hover:border-coal-500 px-2.5 py-1 transition rounded-sm ml-auto"
                     >
                       <Icon icon="mdi:github" className="text-sm" /> GitHub

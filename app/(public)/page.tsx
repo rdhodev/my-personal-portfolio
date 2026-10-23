@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -203,6 +204,7 @@ export default function Home() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={social.label}
                     className="group inline-flex items-center gap-1.5 px-3 py-1.5 bg-coal-900 border border-coal-700 rounded-sm text-mist hover:text-pine-300 hover:border-pine-500/60 hover:bg-coal-800 transition-all text-xs"
                     title={social.label}
                   >
@@ -227,10 +229,13 @@ export default function Home() {
 
 
               {profile?.avatar_url ? (
-                <img
+                <Image
                   src={profile.avatar_url}
                   alt={displayName}
-                  className="w-full h-full object-cover object-top filter grayscale contrast-125 hover:grayscale-0 transition-all duration-300"
+                  fill
+                  priority
+                  sizes="(max-width: 640px) 220px, (max-width: 1024px) 260px, 310px"
+                  className="object-cover object-top filter grayscale contrast-125 hover:grayscale-0 transition-all duration-300"
                 />
               ) : (
                 <div
@@ -379,6 +384,7 @@ export default function Home() {
                   href={proj.demo_url ?? proj.github_url ?? "#"}
                   target={proj.demo_url || proj.github_url ? "_blank" : undefined}
                   rel="noopener noreferrer"
+                  aria-label={proj.title}
                   variants={staggerItem}
                   whileHover={{ y: -3 }}
                   className="group block transition-all duration-300"
@@ -386,10 +392,12 @@ export default function Home() {
                   {/* Image: bordered and rounded, no card border */}
                   <div className="relative overflow-hidden aspect-[4/3] w-full border border-coal-700 mb-4">
                     {proj.image_url ? (
-                      <img
+                      <Image
                         src={proj.image_url}
                         alt={proj.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
                       <div className={`w-full h-full bg-gradient-to-br ${proj.gradient} flex items-center justify-center`}>

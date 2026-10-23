@@ -12,6 +12,7 @@ export default function Footer() {
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="GitHub Profile"
             className="text-mist hover:text-pine-400 transition"
           >
             <Icon icon="mdi:github" className="text-xl" />
@@ -20,12 +21,14 @@ export default function Footer() {
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="LinkedIn Profile"
             className="text-mist hover:text-pine-400 transition"
           >
             <Icon icon="mdi:linkedin" className="text-xl" />
           </a>
           <a
             href="mailto:hello@example.com"
+            aria-label="Send Email"
             className="text-mist hover:text-pine-400 transition"
           >
             <Icon icon="solar:letter-linear" className="text-xl" />
