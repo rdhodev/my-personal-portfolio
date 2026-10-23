@@ -29,7 +29,6 @@ export const metadata: Metadata = {
     ],
   },
   keywords: ["Fullstack Developer", "Software Engineer", "Web Developer", "React", "Next.js", "Node.js", "Ridho Hidayat", "Portfolio"],
-  manifest: "/favicon/site.webmanifest",
   metadataBase: new URL("https://haloridho.my.id"),
   openGraph: {
     type: "website",
