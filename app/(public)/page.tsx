@@ -234,6 +234,7 @@ export default function Home() {
                   alt={displayName}
                   fill
                   priority
+                  fetchPriority="high"
                   sizes="(max-width: 640px) 220px, (max-width: 1024px) 260px, 310px"
                   className="object-cover object-top filter grayscale contrast-125 hover:grayscale-0 transition-all duration-300"
                 />
