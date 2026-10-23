@@ -17,19 +17,19 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://haloridho.my.id"),
   title: {
-    default: "Ridho Hidayat — Software Engineer",
+    default: "Ridho Hidayat — Fullstack Developer",
     template: "%s | Ridho Hidayat",
   },
-  description: "Portfolio Ridho Hidayat, software developer yang membangun website & aplikasi fungsional, cepat, dan rapi.",
-  keywords: ["Software Engineer", "Web Developer", "React", "Next.js", "Ridho Hidayat", "Portfolio"],
+  description: "Portfolio Ridho Hidayat, fullstack developer yang membangun website & aplikasi web fungsional, scalable, cepat, dan modern end-to-end.",
+  keywords: ["Fullstack Developer", "Software Engineer", "Web Developer", "React", "Next.js", "Node.js", "Ridho Hidayat", "Portfolio"],
   authors: [{ name: "Ridho Hidayat", url: "https://haloridho.my.id" }],
   creator: "Ridho Hidayat",
   openGraph: {
     type: "website",
     locale: "id_ID",
     url: "https://haloridho.my.id",
-    title: "Ridho Hidayat — Software Engineer",
-    description: "Portfolio Ridho Hidayat, software developer yang membangun website & aplikasi fungsional, cepat, dan rapi.",
+    title: "Ridho Hidayat — Fullstack Developer",
+    description: "Portfolio Ridho Hidayat, fullstack developer yang membangun website & aplikasi web fungsional, scalable, cepat, dan modern end-to-end.",
     siteName: "Ridho Hidayat Portfolio",
     images: [
       {
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ridho Hidayat — Software Engineer",
-    description: "Portfolio Ridho Hidayat, software developer yang membangun website & aplikasi fungsional, cepat, dan rapi.",
+    title: "Ridho Hidayat — Fullstack Developer",
+    description: "Portfolio Ridho Hidayat, fullstack developer yang membangun website & aplikasi web fungsional, scalable, cepat, dan modern end-to-end.",
     images: ["/ridho-logo2.png"],
     creator: "@rdhohdyat",
   },
