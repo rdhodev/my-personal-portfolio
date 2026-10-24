@@ -112,10 +112,6 @@ export default function BlogPostDetail() {
           </h1>
         </header>
 
-        <div className={`w-full h-52 sm:h-64 rounded-sm bg-gradient-to-br ${post.gradient} flex items-center justify-center mb-8 overflow-hidden border-2 border-coal-700 shadow-[4px_4px_0px_#000000]`}>
-          <Icon icon="solar:document-text-bold-duotone" className="text-white/20 text-5xl" />
-        </div>
-
         {/* Smart content renderer: HTML (Tiptap) or legacy plain text */}
         {post.content.trim().startsWith("<") ? (
           // HTML content from Tiptap rich editor

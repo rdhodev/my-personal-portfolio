@@ -9,6 +9,7 @@ import { createClient } from "@/utils/supabase/client";
 interface BlogPost {
   id: string;
   category: string;
+  content: string;
   date: string;
   excerpt: string;
   gradient: string;
@@ -16,6 +17,13 @@ interface BlogPost {
   slug: string;
   title: string;
   views?: number;
+}
+
+/** Ekstrak URL gambar pertama dari konten HTML Tiptap */
+function extractFirstImage(html: string): string | null {
+  if (!html) return null;
+  const match = html.match(/<img[^>]+src=["']([^"']+)["']/);
+  return match ? match[1] : null;
 }
 
 interface TrendingPost {
@@ -71,7 +79,7 @@ export default function BlogPage() {
 
         const { data: allPosts, error: allPostsError } = await supabase
           .from("posts")
-          .select("id, title, excerpt, date, category, gradient, readTime:read_time, slug")
+          .select("id, title, excerpt, content, date, category, gradient, readTime:read_time, slug")
           .order("created_at", { ascending: false });
 
         if (allPostsError) throw allPostsError;
@@ -157,8 +165,18 @@ export default function BlogPage() {
                     className="group flex flex-col md:flex-row gap-5 p-4 sm:p-5 rounded-sm border-2 border-coal-700 bg-coal-900 transition-all hover:border-pine-400 hover:shadow-[5px_5px_0px_#1F7A4C]"
                     style={{ boxShadow: "4px 4px 0px #000000" }}
                   >
-                    <div className={`md:w-44 h-28 shrink-0 rounded-sm bg-gradient-to-br ${post.gradient} flex items-center justify-center relative overflow-hidden border border-coal-700`}>
-                      <Icon icon="solar:document-text-bold-duotone" className="text-white/30 text-3xl" />
+                    <div className={`md:w-44 h-28 shrink-0 rounded-sm relative overflow-hidden border border-coal-700`}>
+                      {extractFirstImage(post.content) ? (
+                        <img
+                          src={extractFirstImage(post.content)!}
+                          alt={post.title}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className={`w-full h-full bg-gradient-to-br ${post.gradient} flex items-center justify-center`}>
+                          <Icon icon="solar:document-text-bold-duotone" className="text-white/30 text-3xl" />
+                        </div>
+                      )}
                     </div>
 
                     <div className="flex flex-col justify-between grow">
